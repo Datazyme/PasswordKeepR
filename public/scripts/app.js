@@ -1,16 +1,16 @@
 // Client facing scripts here
 document.getElementById("New_Account").addEventListener("click", function(){
   var midSection = document.createElement("div");
-  midSection.setAttribute("id", "mid_section");
+  midSection.setAttribute("class", "mid_section");
 
   var div1 = document.createElement("span");
-  div1.setAttribute("id", "div1");
+  div1.setAttribute("class", "div1");
   var h3 = document.createElement("h3");
   h3.innerHTML = "website name placeholder";
   div1.appendChild(h3);
 
   var div2 = document.createElement("span");
-  div2.setAttribute("id", "div2");
+  div2.setAttribute("class", "div2");
   var h4 = document.createElement("h4");
   h4.innerHTML = "Username";
   div2.appendChild(h4);
@@ -20,7 +20,7 @@ document.getElementById("New_Account").addEventListener("click", function(){
   div2.appendChild(input1);
 
   var div3 = document.createElement("span");
-  div3.setAttribute("id", "div3");
+  div3.setAttribute("class", "div3");
   var h4 = document.createElement("h4");
   h4.innerHTML = "password";
   div3.appendChild(h4);
@@ -30,13 +30,13 @@ document.getElementById("New_Account").addEventListener("click", function(){
   div3.appendChild(input2);
 
   var div4 = document.createElement("span");
-  div4.setAttribute("id", "div4");
+  div4.setAttribute("class", "div4");
   var addBtn = document.createElement("button");
-  addBtn.setAttribute("id", "add");
+  addBtn.setAttribute("class", "add");
   addBtn.innerHTML = "Add";
   div4.appendChild(addBtn);
   var editBtn = document.createElement("button");
-  editBtn.setAttribute("id", "edit");
+  editBtn.setAttribute("class", "edit");
   editBtn.innerHTML = "Edit";
   div4.appendChild(editBtn);
 
