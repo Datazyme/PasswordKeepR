@@ -47,3 +47,13 @@ document.getElementById("New_Account").addEventListener("click", function(){
 
   document.getElementById("New").appendChild(midSection);
 });
+
+// copy button listener
+
+const copyButton = document.getElementById("copy-button");
+const output = document.getElementById("output");
+
+copyButton.addEventListener("click", function() {
+  output.select();
+  document.execCommand("copy");
+});

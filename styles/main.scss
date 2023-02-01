@@ -34,6 +34,15 @@ header{
   margin-top: 20px;
 }
 
+#main{
+  background-color: #830000;
+  height: 200px;
+  width: 500px;
+justify-content: center;
+margin-left: 0
+}
+
+
 
 // buttons
 
@@ -61,10 +70,7 @@ header{
   top: 10px;
 }
 
-button {
-  float: right;
-  margin-left: 10px;
-}
+
 
 .add, .edit{
   appearance: none;
@@ -117,6 +123,7 @@ button {
   word-wrap: break-word;
   margin-bottom: 25px;
   position:absolute;
+  margin-left: 0px;
 }
 
 #title{
