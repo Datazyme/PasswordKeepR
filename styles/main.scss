@@ -8,7 +8,7 @@ body {
 }
 
 header{
- background-color:rgb(131, 14, 131) ;
+ background-color:rgb(38, 1, 224) ;
  width: 100%;
  height: 100px;
  margin-bottom: 100px;
@@ -21,14 +21,15 @@ header{
 #mid_section{
   height: 100px;
   width: 1250px;
-  background-color: bisque;
+  background-color: rgb(115, 98, 210);
   float: left;
   padding-top: 10px;
   margin-left: 0;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-around;
+  align-items: baseline;
+
 }
 
 
@@ -87,6 +88,31 @@ button {
   white-space: nowrap;
   word-wrap: break-word;
   align-self: flex-end;
+
+}
+#New_Account{
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 #title{
@@ -94,6 +120,14 @@ button {
   width: 150px;
   color:rgb(0, 0, 0);
 }
+
+#div1, #div2, #div3, #div4{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
 
 
 
