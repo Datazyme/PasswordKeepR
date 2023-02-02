@@ -36,6 +36,7 @@
 <div id="main" style="display: flex;">
   <div style="flex: 1;">
     <h3>Password Generator:</h3>
+
     <ul>
       <li><input type="checkbox" id="lowercase">Lowercase letters</li>
       <li><input type="checkbox" id="uppercase">Uppercase letters</li>
@@ -46,7 +47,7 @@
   </div>
   <div style="flex: 1;">
     <h3>Generated Password:</h3>
-    <textarea id="output" rows="5" disabled></textarea>
+    <textarea id="output" rows="1"></textarea>
 <button id="copy-button">Copy</button>
   </div>
 </div>
@@ -57,45 +58,42 @@
   <div id="New">
         <button id="New_Account">New Account</button>
         <br>
-    <div class="mid_section">
-        <span class="div1">
-         <h3>website name placeholder</h3>
-        </span>
-        <span class="div2">
-          <h4>Username</h4>
-          <input type="text" placeholder="Textbox 2">
-        </span>
-       <span class="div3">
-         <h4>Password</h4>
-         <input type="text" placeholder="Textbox 1">
-       </span>
-       <span class="div4">
-         <button class="add">Add</button>
-         <button class="edit">Edit</button>
-       </span>
-    </div>
+        <div class="mid_section">
+          <span class="div1">
+            <h3>Website </h3>
+            <form onsubmit="submitForm(event, 'div1')">
+              <input type="text" class="div-input" placeholder="Website">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div1-output" style="display: none"></div>
+          </span>
+          <span class="div2">
+            <h4>Username</h4>
+            <form onsubmit="submitForm(event, 'div2')">
+              <input type="text" class="div-input" placeholder="Username">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div2-output" style="display: none"></div>
+          </span>
+          <span class="div3">
+            <h4>Password</h4>
+            <form onsubmit="submitForm(event, 'div3')">
+              <input type="text" class="div-input" placeholder="Password">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div3-output" style="display: none"></div>
+          </span>
+          <span class="div4">
+            <button class="add">Add</button>
+            <button class="edit">Edit</button>
+          </span>
+        </div>
   </div>
 
 </div>
 
 
-  <!-- <div class="mid_section">
-    <span class="div1">
-      <h3>website name placeholder</h3>
-    </span>
-    <span class="div2">
-      <h4>Username</h4>
-      <input type="text" placeholder="Textbox 2">
-    </span>
-    <span class="div3">
-      <h4>password</h4>
-      <input type="text" placeholder="Textbox 1">
-    </span>
-    <span class="div4">
-      <button class="add">Add</button>
-      <button class="edit">Edit</button>
-    </span>
-  </div> -->
+
 
 
 

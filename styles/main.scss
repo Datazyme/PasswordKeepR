@@ -32,16 +32,39 @@ header{
   margin-top: 25px;
   position: relative;
   margin-top: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 #main{
   background-color: #830000;
   height: 200px;
   width: 500px;
-justify-content: center;
-margin-left: 0
+  justify-content: center;
+  margin-left: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
+
+
+output{
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+	margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 90%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+
+ul {
+list-style-type: none;
+ }
 
 
 // buttons
@@ -87,7 +110,7 @@ margin-left: 0
   font-weight: 500;
   line-height: 20px;
   list-style: none;
-  padding: 6px 16px;
+  padding: 1px 5px;
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
   user-select: none;
   -webkit-user-select: none;
@@ -96,6 +119,7 @@ margin-left: 0
   white-space: nowrap;
   word-wrap: break-word;
   align-self: flex-end;
+  margin: 2px;
 
 }
 #New_Account{
@@ -126,6 +150,10 @@ margin-left: 0
   margin-left: 0px;
 }
 
+#copy-button{
+  margin-bottom: 5px;
+}
+
 #title{
   height: 20px;
   width: 150px;
@@ -137,6 +165,34 @@ margin-left: 0
     flex-direction: row;
     align-items: center;
 
+}
+
+.divsubmit{
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 1px 5px;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin-bottom: 25px;
+  position:absolute;
+  margin-left: 2px;
 }
 
 
