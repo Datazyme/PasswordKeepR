@@ -15,6 +15,7 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
 </head>
 
@@ -48,7 +49,7 @@
   <div style="flex: 1;">
     <h3>Generated Password:</h3>
     <textarea id="output" rows="1"></textarea>
-<button id="copy-button">Copy</button>
+    <button id="copy-button" data-clipboard-target="#output">Copy</button>
   </div>
 </div>
 
@@ -56,46 +57,37 @@
 <br>
 <br>
   <div id="New">
-        <button id="New_Account">New Account</button>
-        <br>
-        <div class="mid_section">
-          <select id="pulldown">
-            <option value="">Select a category</option>
-            <option value="social media">Social Media</option>
-            <option value="gaming">Gaming</option>
-            <option value="work">Work</option>
-            <option value="entertainment">Entertainment</option>
-          </select>
-          <span class="div1">
-            <h3>Website </h3>
-            <form onsubmit="submitForm(event, 'div1')">
-              <input type="text" class="div-input" placeholder="Website">
-              <input type="submit" value="Submit" class="divsubmit">
-            </form>
-            <div id="div1-output" style="display: none"></div>
-          </span>
-          <span class="div2">
-            <h4>Username</h4>
-            <form onsubmit="submitForm(event, 'div2')">
-              <input type="text" class="div-input" placeholder="Username">
-              <input type="submit" value="Submit" class="divsubmit">
-            </form>
-            <div id="div2-output" style="display: none"></div>
-          </span>
-          <span class="div3">
-            <h4>Password</h4>
-            <form onsubmit="submitForm(event, 'div3')">
-              <input type="text" class="div-input" placeholder="Password">
-              <input type="submit" value="Submit" class="divsubmit">
-            </form>
-            <div id="div3-output" style="display: none"></div>
-          </span>
-          <span class="div4">
-            <button class="add">Add</button>
-            <button class="edit">Edit</button>
-          </span>
-        </div>
-  </div>
+    <button id="New_Account">New Account</button>
+    <br>
+    <div class="mid_section">
+      <select id="pulldown">
+        <option value="">Select a category</option>
+        <option value="social media">Social Media</option>
+        <option value="gaming">Gaming</option>
+        <option value="work">Work</option>
+        <option value="entertainment">Entertainment</option>
+      </select>
+      <span class="div1">
+                <h3>Website </h3>
+          <input type="text" class="div-input" placeholder="Website" id="div1-input">
+        <div id="div1-output" style="display: none"></div>
+      </span>
+      <span class="div2">
+        <h4>Username</h4>
+          <input type="text" class="div-input" placeholder="Username" id="div2-input">
+        <div id="div2-output" style="display: none"></div>
+      </span>
+      <span class="div3">
+        <h4>Password</h4>
+          <input type="text" class="div-input" placeholder="Password" id="div3-input">
+        <div id="div3-output" style="display: none"></div>
+      </span>
+      <span class="div4">
+        <button class="add">Add</button>
+        <button class="edit">Edit</button>
+      </span>
+    </div>
+
 
 </div>
 

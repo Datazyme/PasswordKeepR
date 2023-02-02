@@ -1,10 +1,21 @@
 // Client facing scripts here
-
 document.getElementById("New_Account").addEventListener("click", function(){
   var formElements = [    {      title: 'Website',      placeholder: 'Website'    },    {      title: 'Username',      placeholder: 'Username'    },    {      title: 'Password',      placeholder: 'Password'    }  ];
 
   var midSection = document.createElement("div");
   midSection.setAttribute("class", "mid_section");
+
+  var select = document.createElement("select");
+  select.setAttribute("id", "pulldown");
+  var options = `
+    <option value="">Select a category</option>
+    <option value="social media">Social Media</option>
+    <option value="gaming">Gaming</option>
+    <option value="work">Work</option>
+    <option value="entertainment">Entertainment</option>
+  `;
+  select.innerHTML = options;
+  midSection.appendChild(select);
 
   formElements.forEach(function(formElement, index) {
     var div = document.createElement("span");
@@ -23,51 +34,42 @@ document.getElementById("New_Account").addEventListener("click", function(){
     input.setAttribute("placeholder", formElement.placeholder);
     form.appendChild(input);
 
-    var submit = document.createElement("input");
-    submit.setAttribute("type", "submit");
-    submit.setAttribute("value", "Submit");
-    form.appendChild(submit);
-
     div.appendChild(form);
 
     var output = document.createElement("div");
     output.setAttribute("id", `div${index + 1}-output`);
     output.setAttribute("style", "display: none");
     div.appendChild(output);
-
     midSection.appendChild(div);
   });
 
+  var buttons = `
+    <span class="div4">
+      <button class="add">Add</button>
+      <button class="edit">Edit</button>
+    </span>
+  `;
+  midSection.insertAdjacentHTML("beforeend", buttons);
+
   document.body.appendChild(midSection);
-
-  var select = document.createElement("select");
-  select.setAttribute("id", "pulldown");
-
-  var options = [    {      value: '',      text: 'Select a category'    },    {      value: 'social media',      text: 'Social Media'    },    {      value: 'gaming',      text: 'Gaming'    },    {      value: 'work',      text: 'Work'    },    {      value: 'entertainment',      text: 'Entertainment'    }  ];
-
-  options.forEach(function(option) {
-    var optionElement = document.createElement("option");
-    optionElement.setAttribute("value", option.value);
-    optionElement.innerHTML = option.text;
-    select.appendChild(optionElement);
-  });
-
-  midSection.insertBefore(select, midSection.firstChild);
 });
 
 
 
 
+
 // copy button listener
+var clipboard = new ClipboardJS('#copy-button');
 
-// const copyButton = document.getElementById("copy-button");
-// const output = document.getElementById("output");
+clipboard.on('success', function(e) {
+    console.log(e);
+});
 
-// copyButton.addEventListener("click", function() {
-//   output.select();
-//   const newLocal = document.execCommand("copy");
-// });
+clipboard.on('error', function(e) {
+    console.log(e);
+});
 
+sf
 // for Jerome to add to database
 const savedValue = localStorage.getItem("selectedValue");
 if (savedValue) {
@@ -78,3 +80,14 @@ if (savedValue) {
 select.addEventListener("change", function() {
   localStorage.setItem("selectedValue", select.value);
 });
+
+
+
+function submitForm(event, div) {
+  event.preventDefault();
+  const input = document.querySelector(`#${div} form .div-input`);
+  const output = document.querySelector(`#${div}-output`);
+  output.innerHTML = input.value;
+  input.style.display = 'none';
+  output.style.display = 'block';
+}
