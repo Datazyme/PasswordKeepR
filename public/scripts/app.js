@@ -1,29 +1,61 @@
 // Client facing scripts here
-const formTemplate = (index) => `
-<span class="div${index}">
-  <h3>Website </h3>
-  <form onsubmit="submitForm(event, 'div${index}')">
-    <input type="text" id="div${index}-input" placeholder="Website">
-    <input type="submit" value="Submit" class="divsubmit">
-  </form>
-  <div id="div${index}-output" style="display: none"></div>
-</span>
-`;
-
-const outputIds = ['div1', 'div2', 'div3'];
 
 document.getElementById("New_Account").addEventListener("click", function(){
-  let formsHTML = '';
-  for (let i = 0; i < outputIds.length; i++) {
-    formsHTML += formTemplate(i + 1);
-  }
+  var formElements = [    {      title: 'Website',      placeholder: 'Website'    },    {      title: 'Username',      placeholder: 'Username'    },    {      title: 'Password',      placeholder: 'Password'    }  ];
 
-  const midSection = document.createElement("div");
+  var midSection = document.createElement("div");
   midSection.setAttribute("class", "mid_section");
-  midSection.innerHTML = formsHTML + '<span class="div4"><button class="add">Add</button><button class="edit">Edit</button></span>';
 
-  document.getElementById("New").appendChild(midSection);
+  formElements.forEach(function(formElement, index) {
+    var div = document.createElement("span");
+    div.setAttribute("class", `div${index + 1}`);
+
+    var h4 = document.createElement("h4");
+    h4.innerHTML = formElement.title;
+    div.appendChild(h4);
+
+    var form = document.createElement("form");
+    form.setAttribute("onsubmit", `submitForm(event, 'div${index + 1}')`);
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", `div${index + 1}-input`);
+    input.setAttribute("placeholder", formElement.placeholder);
+    form.appendChild(input);
+
+    var submit = document.createElement("input");
+    submit.setAttribute("type", "submit");
+    submit.setAttribute("value", "Submit");
+    form.appendChild(submit);
+
+    div.appendChild(form);
+
+    var output = document.createElement("div");
+    output.setAttribute("id", `div${index + 1}-output`);
+    output.setAttribute("style", "display: none");
+    div.appendChild(output);
+
+    midSection.appendChild(div);
+  });
+
+  document.body.appendChild(midSection);
+
+  var select = document.createElement("select");
+  select.setAttribute("id", "pulldown");
+
+  var options = [    {      value: '',      text: 'Select a category'    },    {      value: 'social media',      text: 'Social Media'    },    {      value: 'gaming',      text: 'Gaming'    },    {      value: 'work',      text: 'Work'    },    {      value: 'entertainment',      text: 'Entertainment'    }  ];
+
+  options.forEach(function(option) {
+    var optionElement = document.createElement("option");
+    optionElement.setAttribute("value", option.value);
+    optionElement.innerHTML = option.text;
+    select.appendChild(optionElement);
+  });
+
+  midSection.insertBefore(select, midSection.firstChild);
 });
+
+
 
 
 // copy button listener
@@ -36,3 +68,13 @@ document.getElementById("New_Account").addEventListener("click", function(){
 //   const newLocal = document.execCommand("copy");
 // });
 
+// for Jerome to add to database
+const savedValue = localStorage.getItem("selectedValue");
+if (savedValue) {
+  select.value = savedValue;
+}
+
+// Save the selected value in local storage when it changes
+select.addEventListener("change", function() {
+  localStorage.setItem("selectedValue", select.value);
+});
