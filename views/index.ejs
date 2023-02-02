@@ -15,10 +15,92 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+
 </head>
 
+
 <body>
-  <h1>Have fun! 🥔</h1>
+
+  <header>
+    <h1 id="title">PasswordKeeperR</h1>
+    <div id="headers">
+      <Span id="buttons">
+        <button id="login-button">Login</button>
+        <button id="register-button">register</button>
+      </Span>
+    </div>
+  </header>
+
+   <!-- Page-specific (main) content here -->
+
+<div id="main" style="display: flex;">
+  <div style="flex: 1;">
+    <h3>Password Generator:</h3>
+
+    <ul>
+      <li><input type="checkbox" id="lowercase">Lowercase letters</li>
+      <li><input type="checkbox" id="uppercase">Uppercase letters</li>
+      <li><input type="checkbox" id="numbers">Numbers</li>
+      <li><input type="checkbox" id="special">Special characters</li>
+    </ul>
+    <button>Submit</button>
+  </div>
+  <div style="flex: 1;">
+    <h3>Generated Password:</h3>
+    <textarea id="output" rows="1"></textarea>
+<button id="copy-button">Copy</button>
+  </div>
+</div>
+
+
+<br>
+<br>
+  <div id="New">
+        <button id="New_Account">New Account</button>
+        <br>
+        <div class="mid_section">
+          <span class="div1">
+            <h3>Website </h3>
+            <form onsubmit="submitForm(event, 'div1')">
+              <input type="text" class="div-input" placeholder="Website">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div1-output" style="display: none"></div>
+          </span>
+          <span class="div2">
+            <h4>Username</h4>
+            <form onsubmit="submitForm(event, 'div2')">
+              <input type="text" class="div-input" placeholder="Username">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div2-output" style="display: none"></div>
+          </span>
+          <span class="div3">
+            <h4>Password</h4>
+            <form onsubmit="submitForm(event, 'div3')">
+              <input type="text" class="div-input" placeholder="Password">
+              <input type="submit" value="Submit" class="divsubmit">
+            </form>
+            <div id="div3-output" style="display: none"></div>
+          </span>
+          <span class="div4">
+            <button class="add">Add</button>
+            <button class="edit">Edit</button>
+          </span>
+        </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
