@@ -91,3 +91,16 @@ function submitForm(event, div) {
   input.style.display = 'none';
   output.style.display = 'block';
 }
+
+document.querySelector("add").addEventListener("click", function() {
+  console.log("hello")
+
+});
+
+// slider
+const slider = document.querySelector("#slider");
+const output = document.querySelector("#length-output");
+
+slider.addEventListener("input", function() {
+  output.innerHTML = slider.value;
+});
