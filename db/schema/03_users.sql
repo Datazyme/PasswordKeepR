@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  role_id INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  master_password VARCHAR(255) NOT NULL,
+  master_password_hint TEXT,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE
+);
