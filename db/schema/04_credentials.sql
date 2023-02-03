@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS credentials CASCADE;
+
+CREATE TABLE credentials (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  role_id INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+  is_user_created BOOLEAN NOT NULL DEFAULT TRUE,
+  website VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  hint TEXT,
+  category VARCHAR(255) NOT NULL,
+  require_master_password BOOLEAN NOT NULL DEFAULT FALSE
+);
