@@ -2,4 +2,5 @@ SELECT organizations.name as organization, roles.name as role, users.name as nam
 FROM users
 JOIN organizations ON organizations.id = organization_id
 JOIN roles ON roles.id = role_id
+WHERE organizations.id = 2
 ORDER BY organization;
