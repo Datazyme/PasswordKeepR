@@ -69,19 +69,11 @@ clipboard.on('error', function(e) {
     console.log(e);
 });
 
-sf
 // for Jerome to add to database
 const savedValue = localStorage.getItem("selectedValue");
 if (savedValue) {
   select.value = savedValue;
 }
-
-// Save the selected value in local storage when it changes
-select.addEventListener("change", function() {
-  localStorage.setItem("selectedValue", select.value);
-});
-
-
 
 function submitForm(event, div) {
   event.preventDefault();
@@ -92,15 +84,11 @@ function submitForm(event, div) {
   output.style.display = 'block';
 }
 
-document.querySelector("add").addEventListener("click", function() {
-  console.log("hello")
-
+document.querySelector(".add").addEventListener("click", function() {
+  console.log("test")
 });
 
 // slider
-const slider = document.querySelector("#slider");
-const output = document.querySelector("#length-output");
-
-slider.addEventListener("input", function() {
-  output.innerHTML = slider.value;
-});
+// passLength.addEventListener("change", (event) => {
+//   passLengthResult.innerText = event.target.value;
+// });
