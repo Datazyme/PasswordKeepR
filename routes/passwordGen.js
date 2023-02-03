@@ -18,7 +18,7 @@
 let randomPassword = function generatePassword(upper, number, symbol, length) {
   //const length = 5;
   let newPassword = "";
-  let variationsCount = [number, symbol].length;
+  let variationsCount = [upper, number, symbol].length;
   for (let i = 0; i < length; i += variationsCount) {
     if (number) {
       newPassword += getRandomNumber();
@@ -43,20 +43,19 @@ let randomPassword = function generatePassword(upper, number, symbol, length) {
 
 function getRandomLower() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
+};
 function getRandomNumber() {
   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
+};
 function getRandomSymbol() {
   const symbols = "!@#$%^&*(){}[]=<>/,.";
   return symbols[Math.floor(Math.random() * symbols.length)];
-}
+};
 function getRandomUpper() {
-  //const upperCase = "!@#$%^&*(){}[]=<>/,.";
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
-}
+};
 
 
 console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
 console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase());
-console.log(randomPassword(getRandomUpper(),getRandomNumber(), getRandomSymbol(), 5));
+console.log(randomPassword(getRandomUpper(), null, null, 5));
