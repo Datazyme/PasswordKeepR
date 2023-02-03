@@ -34,24 +34,38 @@
 
    <!-- Page-specific (main) content here -->
 
-<div id="main" style="display: flex;">
-  <div style="flex: 1;">
-    <h3>Password Generator:</h3>
-
-    <ul>
-      <li><input type="checkbox" id="lowercase">Lowercase letters</li>
-      <li><input type="checkbox" id="uppercase">Uppercase letters</li>
-      <li><input type="checkbox" id="numbers">Numbers</li>
-      <li><input type="checkbox" id="special">Special characters</li>
-    </ul>
-    <button>Submit</button>
-  </div>
-  <div style="flex: 1;">
-    <h3>Generated Password:</h3>
-    <textarea id="output" rows="1"></textarea>
+   <div class="main">
+    <h2>Password Generator</h2>
+    <div class="result-container">
+      <textarea id="output" rows="1"></textarea>
     <button id="copy-button" data-clipboard-target="#output">Copy</button>
+    </div>
+    <div class="settings">
+      <div class="input-group">
+        <label>Password length (4-20)</label>
+        <input type="range" id="length" min="4" max="20" step="1" />
+        <span id="length-result">20</span>
+      </div>
+      <div class="input-group">
+        <label>Include numbers</label>
+        <input type="checkbox" id="numbers" checked />
+      </div>
+      <div class="input-group">
+        <label>Include symbols</label>
+        <input type="checkbox" id="symbols" checked />
+      </div>
+      <div class="input-group">
+        <label>Include upper case letters</label>
+        <input type="checkbox" id="upper-case" checked />
+      </div>
+      <div class="input-group">
+        <label>Include lower case letters</label>
+        <input type="checkbox" id="lower-case" checked />
+      </div>
+    </div>
+    <button class="generate-btn" id="generate">Generate</button>
   </div>
-</div>
+
 
 
 <br>
