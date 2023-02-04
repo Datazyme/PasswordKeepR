@@ -1,5 +1,5 @@
 // Client facing scripts here
-$(() => {
+$(document).ready(function(){
   $('#fetch-users').on('click', () => {
     $.ajax({
       method: 'GET',
