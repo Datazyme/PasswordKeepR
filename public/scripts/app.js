@@ -1,4 +1,5 @@
 // Client facing scripts here
+// refactor it to jquery
 document.getElementById("New_Account").addEventListener("click", function(){
   var formElements = [    {      title: 'Website',      placeholder: 'Website'    },    {      title: 'Username',      placeholder: 'Username'    },    {      title: 'Password',      placeholder: 'Password'    }  ];
 
@@ -201,8 +202,20 @@ function getRandomUpper() {
 
 
 
-// slider
-// passLength.addEventListener("change", (event) => {
-//   passLengthResult.innerText = event.target.value;
-// });
+$(document).ready(function(){
+// step 1 target
+// step 2 add event listener
+// step 3 effect
+  $(".test-password").submit(function(event){
+    event.preventDefault()
+    const input = $(".text-box").val()
+    $.ajax({
+      method: "POST",
+      url: "/password",
+      data: input
+    })
+  })
+})
+
+
 
