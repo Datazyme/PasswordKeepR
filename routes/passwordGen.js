@@ -2,11 +2,11 @@
 // const result = document.querySelector("#output");
 // const passLength = document.querySelector("#length");
 // const passLengthResult = document.querySelector("#length-result");
-// const includeNumbers = document.querySelector("#numbers");
-// const includeSymbols = document.querySelector("#special");
-// const includeUppercase = document.querySelector("#uppercase")
-// const includeLowercase = document.querySelector("#lowercase")
-// const generateBtn = document.querySelector("#generate");
+const includeNumbers = document.querySelector("#numbers");
+const includeSymbols = document.querySelector("#special");
+const includeUppercase = document.querySelector("#uppercase")
+const includeLowercase = document.querySelector("#lowercase")
+const generateBtn = document.querySelector("#generate");
 // const copyPass = document.querySelector("#copy");
 
 // // Listen for password range change
@@ -55,7 +55,7 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 };
 
-
-console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
-console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase());
-console.log(randomPassword(getRandomUpper(), null, null, 5));
+module.exports = randomPassword;
+// console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97));
+// console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase());
+// console.log(randomPassword(getRandomUpper(), null, null, 5));
