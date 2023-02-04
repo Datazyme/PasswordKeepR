@@ -88,6 +88,119 @@ document.querySelector(".add").addEventListener("click", function() {
   console.log("test")
 });
 
+//target all the necessary HTML elements with unique identifiers
+const result = document.querySelector("#output");
+const passLength = document.querySelector("#length");
+const passLengthResult = document.querySelector("#length-result");
+const includeNumbers = document.querySelector("#numbers");
+const includeSymbols = document.querySelector("#symbols");
+const includeUppercase = document.querySelector("#upper-case")
+const includeLowercase = document.querySelector("#lower-case")
+const generateBtn = document.querySelector("#generate");
+// const copyPass = document.querySelector("#copy");
+
+// Listen for checkbox ticked and length
+includeNumbers.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+
+includeSymbols.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+
+includeUppercase.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+
+includeLowercase.addEventListener('change', function() {
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
+
+// Set default password length 20 max on load
+document.addEventListener("DOMContentLoaded", () => {
+  passLength.value = 20;
+  passLengthResult.innerText = 20;
+  let onLoadLength = passLength.value;
+  let onLoadNumbers = includeNumbers.checked;
+  let onLoadSymbols = includeSymbols.checked;
+  let onLoadUpperCase = includeUppercase.checked;
+  let onLoadLowerCase = includeLowercase.checked;
+  result.value = randomPassword(onLoadLowerCase, onLoadUpperCase, onLoadNumbers, onLoadSymbols, onLoadLength);
+});
+// Listen for password range change
+passLength.addEventListener("change", (event) => {
+  passLengthResult.innerText = event.target.value;
+  console.log(passLengthResult.innerText)
+});
+
+generateBtn.addEventListener("click", () => {
+  const length = passLengthResult.innerText;
+  const numbers = includeNumbers.checked;
+  const symbols = includeSymbols.checked;
+  const upperCase = includeUppercase.checked;
+  //const lowerCase = includeLowercase.checked;
+  result.value = randomPassword(length, numbers, symbols, upperCase);
+});
+
+let randomPassword = function generatePassword(length, number, symbol, upper) {
+  //const length = 5;
+  let newPassword = "";
+  let variationsCount = [upper, number, symbol].length;
+  for (let i = 0; i < length; i += variationsCount) {
+    if (number) {
+      newPassword += getRandomNumber();
+    } else {
+      newPassword += getRandomLower();
+    }
+    if (symbol) {
+      newPassword += getRandomSymbol();
+    } else {
+      newPassword += getRandomLower();
+    }
+    if (upper) {
+      newPassword += getRandomUpper();
+    } else {
+      newPassword += getRandomLower();
+    }
+    newPassword += getRandomLower();
+  }
+  const finalPassword = newPassword.slice(0, length);
+  return finalPassword;
+}
+
+function getRandomLower() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+};
+function getRandomNumber() {
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+};
+function getRandomSymbol() {
+  const symbols = "!@#$%^&*(){}[]=<>/,.";
+  return symbols[Math.floor(Math.random() * symbols.length)];
+};
+function getRandomUpper() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
+};
+
+
+
+
 // slider
 // passLength.addEventListener("change", (event) => {
 //   passLengthResult.innerText = event.target.value;
