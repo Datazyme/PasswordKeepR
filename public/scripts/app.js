@@ -56,9 +56,6 @@ document.getElementById("New_Account").addEventListener("click", function(){
 });
 
 
-
-
-
 // copy button listener
 var clipboard = new ClipboardJS('#copy-button');
 
