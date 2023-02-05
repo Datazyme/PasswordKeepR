@@ -211,11 +211,101 @@ $(document).ready(function(){
     const input = $(".text-box").val()
     $.ajax({
       method: "POST",
-      url: "/password",
+      url: "/api/passwords",
       data: input
     })
   })
 })
 
+// jerome's code
+$(document).ready(function(){
+
+  //helper function that returns the data in html format
+  const getPasswords = (object) => {
+    const password = `
+    <tr>
+      <td class="password_id">${object.id}</td>
+      <td>${object.website}</td>
+      <td>${object.username}</td>
+      <td>${object.password}</td>
+      <td>${object.hint}</td>
+      <td>${object.category}</td>
+      <td>${object.require_master_password}</td>
+      <td>
+        <form class="password-edit" action="/api/passwords/edit" method="post">
+          <input type="submit" value="Edit">
+        </form>
+      </td>
+      <td>
+      <button class="password-delete">Delete</button>
+      </td>
+    </tr>
+    `;
+    return password;
+  };
 
 
+  //GET request: pull data from api/passwords route
+  $.get('/api/passwords')
+    .done(function(response) {
+      //loops through JSON object from api/passwords route and append every entry to the password table
+      for (const password of response.passwords) {
+        $('.passwords-container').prepend(getPasswords(password))
+      }
+    });
+
+    // POST request:
+    $(".new-password-form").submit(function(event){
+      event.preventDefault()
+      const user_id = 1;
+      const organization_id = 1;
+      const role_id = 3;
+      const is_user_created = true;
+      const category = $(".new-category").val();
+      const website = $(".new-website").val();
+      const username = $(".new-username").val();
+      const password = $(".new-password").val();
+      const hint = $(".new-hint").val();
+      const require_master_password = $(".new-master-password-requirement").val();
+      console.log('submit')
+      $.post('/api/passwords',
+      {
+        user_id,
+        organization_id,
+        role_id,
+        is_user_created,
+        website,
+        username,
+        password,
+        hint,
+        category,
+        require_master_password
+      })
+      .done(function(response) {
+        // code ASYNC load here
+        // $.get('/api/passwords')
+        //   .done(response => {
+        //     $('.passwords-container').prepend(getPasswords(response))
+        //     $('.passwords-container').slideDown();
+        //   })
+      })
+    });
+
+    $(".password-delete").on("click", function() {
+      console.log('hello')
+      console.log($(this).text());
+    })
+
+    $(".password-delete").submit(function(event){
+      event.preventDefault()
+      console.log('deleted')
+      // console.log($(this).find('.password_id').html())
+      console.log('deleted')
+      // console.log($(this).html())
+      const object_id = 'hello';
+      $.post('/api/passwords/delete', { id: object_id })
+      .done(function(response) {
+      })
+    })
+
+});
