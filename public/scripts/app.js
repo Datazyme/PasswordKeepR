@@ -159,7 +159,6 @@ generateBtn.addEventListener("click", () => {
 });
 
 let randomPassword = function generatePassword(length, number, symbol, upper) {
-  //const length = 5;
   let newPassword = "";
   let variationsCount = [upper, number, symbol].length;
   for (let i = 0; i < length; i += variationsCount) {
@@ -197,12 +196,4 @@ function getRandomSymbol() {
 function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 };
-
-
-
-
-// slider
-// passLength.addEventListener("change", (event) => {
-//   passLengthResult.innerText = event.target.value;
-// });
 
