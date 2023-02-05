@@ -38,7 +38,7 @@ const passwordRoutes = require('./routes/password');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/password', passwordRoutes);
+app.use('/api/passwords', passwordRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
