@@ -198,11 +198,18 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 };
 
-
-
-
-// slider
-// passLength.addEventListener("change", (event) => {
-//   passLengthResult.innerText = event.target.value;
-// });
+$(document).ready(function(){
+  // step 1 target
+  // step 2 add event listener
+  // step 3 effect
+    $(".test-password").submit(function(event){
+      event.preventDefault()
+      const input = $(".text-box").val()
+      $.ajax({
+        method: "POST",
+        url: "/password",
+        data: input
+      })
+    })
+  });
 
