@@ -56,9 +56,6 @@ document.getElementById("New_Account").addEventListener("click", function(){
 });
 
 
-
-
-
 // copy button listener
 var clipboard = new ClipboardJS('#copy-button');
 
@@ -160,7 +157,6 @@ generateBtn.addEventListener("click", () => {
 });
 
 let randomPassword = function generatePassword(length, number, symbol, upper) {
-  //const length = 5;
   let newPassword = "";
   let variationsCount = [upper, number, symbol].length;
   for (let i = 0; i < length; i += variationsCount) {
@@ -199,30 +195,25 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 };
 
-
-
-
 $(document).ready(function(){
-// step 1 target
-// step 2 add event listener
-// step 3 effect
-  $(".test-password").submit(function(event){
-    event.preventDefault()
-    const input = $(".text-box").val()
-    $.ajax({
-      method: "POST",
-      url: "/api/passwords",
-      data: input
+  // step 1 target
+  // step 2 add event listener
+  // step 3 effect
+    $(".test-password").submit(function(event){
+      event.preventDefault()
+      const input = $(".text-box").val()
+      $.ajax({
+        method: "POST",
+        url: "/api/passwords",
+        data: input
+      })
     })
-  })
-})
-
-// jerome's code
+  });// jerome's code
 $(document).ready(function(){
 
   //helper function that returns the data in html format
   const getPasswords = (object) => {
-    const password = `
+    const $password = $(`
     <tr>
       <td class="password_id">${object.id}</td>
       <td>${object.website}</td>
@@ -240,19 +231,35 @@ $(document).ready(function(){
       <button class="password-delete">Delete</button>
       </td>
     </tr>
-    `;
-    return password;
+    `);
+    return $password;
   };
 
-
-  //GET request: pull data from api/passwords route
-  $.get('/api/passwords')
-    .done(function(response) {
-      //loops through JSON object from api/passwords route and append every entry to the password table
-      for (const password of response.passwords) {
+const loadEntry = function() {
+    $.ajax('/api/passwords', { method: 'GET' })
+      .then((response) => {
+        console.log("your page is grabbing the tweets from database", response);
+        //loops through JSON object from api/passwords route and append every entry to the password table
+        for (const password of response.passwords) {
         $('.passwords-container').prepend(getPasswords(password))
       }
-    });
+        //(password);
+      })
+      .catch((err) => {
+        console.log("There was an ERROR ", err);
+      });
+  };
+  //calls function
+  loadEntry();
+
+  //GET request: pull data from api/passwords route
+  // $.get('/api/passwords')
+  //   .done(function(response) {
+  //     //loops through JSON object from api/passwords route and append every entry to the password table
+  //     for (const password of response.passwords) {
+  //       $('.passwords-container').prepend(getPasswords(password))
+  //     }
+  //   });
 
     // POST request:
     $(".new-password-form").submit(function(event){
@@ -267,7 +274,7 @@ $(document).ready(function(){
       const password = $(".new-password").val();
       const hint = $(".new-hint").val();
       const require_master_password = $(".new-master-password-requirement").val();
-      console.log('submit')
+
       $.post('/api/passwords',
       {
         user_id,
@@ -281,14 +288,17 @@ $(document).ready(function(){
         category,
         require_master_password
       })
-      .done(function(response) {
-        // code ASYNC load here
-        // $.get('/api/passwords')
-        //   .done(response => {
-        //     $('.passwords-container').prepend(getPasswords(response))
-        //     $('.passwords-container').slideDown();
-        //   })
-      })
+      // .then(function(response) {
+      //   // code ASYNC load here
+      //   // $.get('/api/passwords')
+      //   //   .done(response => {
+      //   //     $('.passwords-container').prepend(getPasswords(response))
+      //   //     $('.passwords-container').slideDown();
+      //   console.log(response, "response from post")
+      //   //   })
+      // })
+      console.log('submit');
+      loadEntry();
     });
 
     $(".password-delete").on("click", function() {
