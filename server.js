@@ -32,6 +32,8 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const passwordRoutes = require('./routes/password');
+const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -39,6 +41,8 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/api/passwords', passwordRoutes);
+app.use('/login', loginRoutes);
+app.use('/register', registerRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -48,6 +52,66 @@ app.use('/api/passwords', passwordRoutes);
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+
+// login routes
+
+app.get("/login", (req, res) => {
+  if(req.session.user_id){
+    return res.redirect("/urls")
+  }
+  const templatevars = {
+    user: null,
+  };
+  res.render("urls_login", templatevars);
+});
+
+app.post('/login', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  // Verify the username and password
+
+
+  // Render the login page template with the entered username
+  res.render('login', { username: username });
+});
+
+// register page
+app.get("/register", (req, res) => {
+  if(req.session.user_id){
+    res.redirect("/");
+    return
+  }
+  const templatevars = { user: null};
+  res.render("urls_register", templatevars);
+});
+
+app.post('/register', (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Validate the user information
+  // ...
+
+  // Save the user information to a database
+  // ...
+
+  // Render the registration success page
+  res.render('register', { username: username, email: email });
+});
+
+
+// POST /logout
+app.post("/logout", (req, res) => {
+
+  req.session = null
+  // send the user somewhere
+  res.redirect("/login");
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
