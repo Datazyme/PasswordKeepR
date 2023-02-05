@@ -1,4 +1,5 @@
 // Client facing scripts here
+// refactor it to jquery
 document.getElementById("New_Account").addEventListener("click", function(){
   var formElements = [    {      title: 'Website',      placeholder: 'Website'    },    {      title: 'Username',      placeholder: 'Username'    },    {      title: 'Password',      placeholder: 'Password'    }  ];
 
@@ -196,4 +197,12 @@ function getRandomSymbol() {
 function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 };
+
+
+
+
+// slider
+// passLength.addEventListener("change", (event) => {
+//   passLengthResult.innerText = event.target.value;
+// });
 
