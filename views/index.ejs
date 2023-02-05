@@ -17,6 +17,27 @@
   <script defer src="/scripts/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
+  <!-- jerome's code -->
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      vertical-align: middle !important;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    </style>
+<!--  -->
 
 </head>
 
@@ -113,13 +134,60 @@
 
 
 <div>
-  <form class="test-password" action="/password" method="post">
+  <form class="test-password" action="/api/passwords" method="post">
     <input class="text-box" type="text">
     <button>submit</button>
   </form>
 
 </div>
 
+<!-- jerome's code -->
+<br>
+<br>
+<form class="new-password-form" action="/api/passwords" method="post">
+  <label>Category</label>
+  <select id="category-pulldown" class="new-category">
+    <option value="Social Media">Social Media</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Work">Work</option>
+    <option value="Entertainment">Entertainment</option>
+  </select>
+  <label>Website</label>
+  <input type="text" placeholder="http://" class="new-website">
+  <label>Username</label>
+  <input type="text" class="new-username">
+  <label>Password</label>
+  <input type="text" class="new-password">
+  <label>Hint</label>
+  <input type="text" class="new-hint">
+  <label>Require master password?</label>
+  <select id="master-password-pulldown" class="new-master-password-requirement">
+    <option value="False">False</option>
+    <option value="True">True</option>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Website</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Hint</th>
+      <th>Category</th>
+      <th>Require Master Password</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <!-- placeholder for passwords data -->
+  <tbody class="passwords-container">
+  </tbody>
+</table>
 
 </body>
 
