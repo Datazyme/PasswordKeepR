@@ -213,26 +213,49 @@ $(document).ready(function(){
 
   //helper function that returns the data in html format
   const getPasswords = (object) => {
-    const $password = $(`
+    const $password = `
     <tr>
-      <td class="password_id">${object.id}</td>
-      <td>${object.website}</td>
-      <td>${object.username}</td>
-      <td>${object.password}</td>
-      <td>${object.hint}</td>
-      <td>${object.category}</td>
-      <td>${object.require_master_password}</td>
-      <td>
-        <form class="password-edit" action="/api/passwords/edit" method="post">
-          <input type="submit" value="Edit">
-        </form>
-      </td>
-      <td>
-      <button class="password-delete">Delete</button>
-      </td>
+      <td class="password_id" style="display:none;">${object.id}</td>
+      <td class="password_website">${object.website}</td>
+      <td class="password_username">${object.username}</td>
+      <td class="password_password">${object.password}</td>
+      <td class="password_hint">${object.hint === null ? '' : object.hint}</td>
+      <td class="password_category">${object.category}</td>
+      <td class="password_require_master">${object.require_master_password}</td>
+      <td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>
+      <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
     </tr>
     `);
-    return $password;
+    return password;
+  };
+
+  const editPasswords = (object) => {
+    const edit_box = `
+    <tr>
+      <td class="password_id" style="display:none;">${object.id}</td>
+      <td class="edit-password_website"><input type="text" placeholder="http://" value="${object.website}"></td>
+      <td class="edit-password_username"><input type="text" value="${object.username}"></td>
+      <td class="edit-password_password"><input type="text" value="${object.password}"></td>
+      <td class="edit-password_hint"><input type="text" value="${object.hint}"></td>
+      <td class="edit-password_category">
+        <select id="category-pulldown" value="${object.category}">
+        <option value="Social Media">Social Media</option>
+        <option value="Gaming">Gaming</option>
+        <option value="Work">Work</option>
+        <option value="Entertainment">Entertainment</option>
+        </select>
+      </td>
+      <td class="edit-password_require_master">
+        <select id="master-password-pulldown" value="${object.require_master}">
+        <option value=false>False</option>
+        <option value=true>True</option>
+        </select>
+      </td>
+      <td><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
+      <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
+    </tr>
+    `;
+    return edit_box;
   };
 
 const loadEntry = function() {
@@ -261,8 +284,9 @@ const loadEntry = function() {
   //     }
   //   });
 
+
     // POST request:
-    $(".new-password-form").submit(function(event){
+    $("#new-password-form").submit(function(event){
       event.preventDefault()
       const user_id = 1;
       const organization_id = 1;
@@ -273,8 +297,8 @@ const loadEntry = function() {
       const username = $(".new-username").val();
       const password = $(".new-password").val();
       const hint = $(".new-hint").val();
-      const require_master_password = $(".new-master-password-requirement").val();
-
+      const require_master_password = $(".new-require-master").val();
+      // console.log('submit')
       $.post('/api/passwords',
       {
         user_id,
@@ -288,34 +312,56 @@ const loadEntry = function() {
         category,
         require_master_password
       })
-      // .then(function(response) {
-      //   // code ASYNC load here
-      //   // $.get('/api/passwords')
-      //   //   .done(response => {
-      //   //     $('.passwords-container').prepend(getPasswords(response))
-      //   //     $('.passwords-container').slideDown();
-      //   console.log(response, "response from post")
-      //   //   })
-      // })
       console.log('submit');
       loadEntry();
     });
 
-    $(".password-delete").on("click", function() {
-      console.log('hello')
-      console.log($(this).text());
-    })
 
-    $(".password-delete").submit(function(event){
-      event.preventDefault()
-      console.log('deleted')
-      // console.log($(this).find('.password_id').html())
-      console.log('deleted')
-      // console.log($(this).html())
-      const object_id = 'hello';
-      $.post('/api/passwords/delete', { id: object_id })
-      .done(function(response) {
-      })
-    })
+        $("#password-delete").submit(function(event){
+          // event.preventDefault()
+          const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
+          $.post('/api/passwords/delete', { password_id })
+        });
 
-});
+        $("#password-edit").submit(function(event){
+          event.preventDefault()
+          // const childrenSelector = $(event.originalEvent.submitter).parent().parent();
+          var childrenSelector = (selector) => {
+            return $(event.originalEvent.submitter).parent().parent().children(`${selector}`).text();
+          }
+          const data = {
+            id: childrenSelector('.password_id'),
+            website: childrenSelector('.password_website'),
+            username: childrenSelector('.password_username'),
+            password: childrenSelector('.password_password'),
+            hint: childrenSelector('.password_hint'),
+            category: childrenSelector('.password_category'),
+            require_master: childrenSelector('.password_require_master')
+          }
+          // console.log($(event.originalEvent.submitter).parent().parent())
+          $(event.originalEvent.submitter).parent().parent().replaceWith(editPasswords(data))
+        });
+
+        $("#password-edit-submit").submit(function(event) {
+          // event.preventDefault()
+
+          var siblingsSelector = (selector) => {
+            return $(event.originalEvent.submitter).parent().siblings(`${selector}`).children().val();
+          }
+
+          const data = {
+            id: $(event.originalEvent.submitter).parent().siblings('.password_id').text(),
+            website: siblingsSelector('.edit-password_website'),
+            username: siblingsSelector('.edit-password_username'),
+            password: siblingsSelector('.edit-password_password'),
+            hint: siblingsSelector('.edit-password_hint'),
+            category: siblingsSelector('.edit-password_category'),
+            require_master_password: siblingsSelector('.edit-password_require_master')
+          }
+
+          $.post('/api/passwords/edit', data)
+        });
+
+
+      });
+

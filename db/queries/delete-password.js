@@ -1,8 +1,8 @@
 const db = require('../connection');
 
-const deletePassword = (object) => {
+const deletePassword = (id) => {
   return db.query(`DELETE FROM credentials WHERE id = $1 RETURNING *;`,
-  [object.id])
+  [id])
     .then(data => {
       return data.rows
     });
