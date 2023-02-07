@@ -210,10 +210,6 @@ function getRandomUpper() {
 //   });
 // });
 
-// jerome's code
-$(document).ready(function() {
-
-  //helper function that returns the data in html format
 const getPasswords = (object) => {
   const password = `
   <tr>
@@ -290,8 +286,10 @@ $(document).ready(function() {
   $("#password-delete").submit(function(event) {
     event.preventDefault()
     const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
-    $.post('/api/passwords/delete', { password_id });
-    loadEntry();
+    $.post('/api/passwords/delete', { password_id })
+      .then(() => {
+        loadEntry();
+      })
   });
 
   $("#password-edit").submit(function(event) {
@@ -329,9 +327,12 @@ $(document).ready(function() {
       category: siblingsSelector('.edit-password_category'),
       require_master_password: siblingsSelector('.edit-password_require_master')
     };
-
-    $.post('/api/passwords/edit', data);
-    loadEntry();
+    $.post('/api/passwords/edit', data)
+      .then(() => {
+        loadEntry();
+      })
   });
 });
+
+
 
