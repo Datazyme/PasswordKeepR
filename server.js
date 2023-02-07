@@ -5,7 +5,8 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-
+const { users } = require("./utilities/db.js");
+const userHelper = require("./utilities/userHelper.js")(users);
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -50,32 +51,37 @@ app.use('/register', registerRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+
+    res.render("index", {users:users});
 });
 
 
 // login routes
 
-app.get("/login", (req, res) => {
+app.get('/login', (req, res) => {
   if(req.session.user_id){
     return res.redirect("/urls")
   }
   const templatevars = {
     user: null,
   };
-  res.render("urls_login", templatevars);
+  res.render('login', templatevars);
 });
 
 app.post('/login', (req, res) => {
-  const username = req.body.username;
+  const useremail = req.body.username;
   const password = req.body.password;
 
-  // Verify the username and password
+  if (!useremail || !password) {
+    return res.status(400).send("must fill out valid email and password");
+  }
+  if (useremail === undefined) {
+    return res.status(400).send("No user found with that email");
+  }
 
-
-  // Render the login page template with the entered username
-  res.render('login', { username: username });
+  res.redirect("/");
 });
+
 
 // register page
 app.get("/register", (req, res) => {
@@ -84,22 +90,29 @@ app.get("/register", (req, res) => {
     return
   }
   const templatevars = { user: null};
-  res.render("urls_register", templatevars);
+  res.render("/register", templatevars);
 });
 
 app.post('/register', (req, res) => {
-  const username = req.body.username;
-  const email = req.body.email;
+  const useremail = req.body.email;
   const password = req.body.password;
-
+  const currentUser = userHelper.getUserByEmail(useremail, users);
   // Validate the user information
-  // ...
 
+  if (!useremail || !password) {
+    return res.status(400).send("please provide an email and a password");
+  }
+  if (currentUser) {
+    return res.status(400).send("Email is already registered");
+  }
   // Save the user information to a database
-  // ...
+  users = {
+    email: useremail,
+    password: password,
+  };
 
-  // Render the registration success page
-  res.render('register', { username: username, email: email });
+  req.session.user_id = id;
+  res.redirect("/index")
 });
 
 
