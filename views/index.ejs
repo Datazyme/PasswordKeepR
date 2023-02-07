@@ -178,6 +178,7 @@
 <form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
   <select id="category-pulldown" class="new-category" required>
+    <option disabled selected value>-- Select a category --</option>
     <option value="Social Media">Social Media</option>
     <option value="Gaming">Gaming</option>
     <option value="Work">Work</option>
@@ -193,6 +194,7 @@
   <input type="text" class="new-hint">
   <label>Require master password?</label>
   <select id="master-password-pulldown" class="new-require-master" required>
+    <option disabled selected value>-- Choose option --</option>
     <option value=false>False</option>
     <option value=true>True</option>
   </select>
