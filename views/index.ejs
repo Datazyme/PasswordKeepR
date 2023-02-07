@@ -47,8 +47,8 @@
   <header>
     <h1 id="title">PasswordKeeperR</h1>
     <div id="headers">
-      <% if(users){ %>
-        <p> Logged In as : <%= users.email %> </p>
+      <% if(user){ %>
+        <p> Logged In as : <%= user.email %> </p>
         <form action="/logout"   method="POST" >
          <button  type="submit"> Logout </button>
         </form>

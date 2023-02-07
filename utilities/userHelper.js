@@ -1,6 +1,14 @@
-function UserHelper(db) {
-  const users = {...db};
+function UserHelper(users) {
   return {
+    generateId: function () {
+      const lib = 'qwertyuiopasdfghjklzxcvbnm0123456789';
+      let id = '';
+      for (let i = 0; i < 6; i++) {
+        const index = Math.floor(Math.random() * lib.length);
+        id += lib[index];
+      }
+      return id;
+    },
     // get user by verifying email and password
     loginUser: function (email, password) {
       if (!email || !password) {
@@ -17,9 +25,10 @@ function UserHelper(db) {
     },
 
     // to register a new user
-    registerUser: function (name, email, password) {
+    registerUser: function (email, password) {
+      console.log(users)
       const id = this.generateId();
-      users[id] = { id, name, email, password }
+      users[id] = { id, email, password }
 
       return users[id]
     },
@@ -31,6 +40,11 @@ function UserHelper(db) {
         }
       }
       return undefined
+    },
+
+    getUserById: function (id, userdb){
+      return userdb[id]
+
     }
   }
 }

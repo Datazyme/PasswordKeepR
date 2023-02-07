@@ -8,7 +8,16 @@ const morgan = require('morgan');
 const { users } = require("./utilities/db.js");
 const userHelper = require("./utilities/userHelper.js")(users);
 const PORT = process.env.PORT || 8080;
+const bodyParser = require('body-parser');
 const app = express();
+const cookieSession = require("cookie-session");
+app.use(cookieSession({
+  name: 'session',
+  keys: ["key1", "key2"],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  rolling: true
+}))
+// download cookie session
 
 app.set('view engine', 'ejs');
 
@@ -26,7 +35,7 @@ app.use(
   })
 );
 app.use(express.static('public'));
-
+app.use(bodyParser.urlencoded({ extended: false }));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
@@ -51,16 +60,17 @@ app.use('/register', registerRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-
-    res.render("index", {users:users});
+  const templatevars = {
+    user: userHelper.getUserById(req.session.user_id, users)
+  }
+  res.render("index", templatevars);
 });
 
 
 // login routes
-
 app.get('/login', (req, res) => {
-  if(req.session.user_id){
-    return res.redirect("/urls")
+  if (req.session.user_id) {
+    return res.redirect("/");
   }
   const templatevars = {
     user: null,
@@ -69,59 +79,58 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const useremail = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
+  const user = userHelper.getUserByEmail(email, users);
 
-  if (!useremail || !password) {
-    return res.status(400).send("must fill out valid email and password");
+  console.log(req.body)
+  if (!email || !password) {
+    return res.status(400).send("Please provide a valid email and password");
   }
-  if (useremail === undefined) {
+  if (!user) {
     return res.status(400).send("No user found with that email");
   }
-
+  if (user.password !== password) {
+    return res.status(400).send("Incorrect password");
+  }
+  req.session.user_id = user.id;
   res.redirect("/");
 });
 
-
-// register page
+// Register page
 app.get("/register", (req, res) => {
-  if(req.session.user_id){
+  if (req.session.user_id) {
     res.redirect("/");
-    return
+    return;
   }
   const templatevars = { user: null};
-  res.render("/register", templatevars);
+  res.render("register", templatevars);
 });
 
-app.post('/register', (req, res) => {
-  const useremail = req.body.email;
-  const password = req.body.password;
-  const currentUser = userHelper.getUserByEmail(useremail, users);
-  // Validate the user information
 
-  if (!useremail || !password) {
+
+app.post("/register", (req, res) => {
+  const userEmail = req.body.email;
+  const password = req.body.password;
+
+  if (!userEmail || !password) {
     return res.status(400).send("please provide an email and a password");
   }
-  if (currentUser) {
+  if (userHelper.getUserByEmail(userEmail, users)) {
     return res.status(400).send("Email is already registered");
   }
-  // Save the user information to a database
-  users = {
-    email: useremail,
-    password: password,
-  };
 
-  req.session.user_id = id;
-  res.redirect("/index")
+  const user = userHelper.registerUser(userEmail, password)
+  req.session.user_id = user.id;
+  res.redirect("/")
 });
+
 
 
 // POST /logout
 app.post("/logout", (req, res) => {
-
-  req.session = null
-  // send the user somewhere
-  res.redirect("/login");
+  req.session = null;
+  res.redirect("/");
 });
 
 
