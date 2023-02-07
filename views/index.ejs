@@ -144,7 +144,12 @@
 <!-- jerome's code -->
 <br>
 <br>
-<form class="new-password-form" action="/api/passwords" method="post">
+
+<form id="password-edit-submit" action="/api/passwords/edit" method="post"></form>
+<form id="password-edit"></form>
+<form id="password-delete" action="/api/passwords/delete" method="post"></form>
+
+<form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
   <select id="category-pulldown" class="new-category">
     <option value="Social Media">Social Media</option>
@@ -161,19 +166,18 @@
   <label>Hint</label>
   <input type="text" class="new-hint">
   <label>Require master password?</label>
-  <select id="master-password-pulldown" class="new-master-password-requirement">
-    <option value="False">False</option>
-    <option value="True">True</option>
+  <select id="master-password-pulldown" class="new-require-master">
+    <option value=false>False</option>
+    <option value=true>True</option>
   </select>
   <input type="submit" value="Submit">
 </form>
-
 <br>
 
 <table>
   <thead>
     <tr>
-      <th>#</th>
+      <th style="display:none;">#</th>
       <th>Website</th>
       <th>Username</th>
       <th>Password</th>
