@@ -199,61 +199,19 @@ function getRandomUpper() {
 // jerome's code
 $(document).ready(function() {
 
-  loadEntry();
+    //calls function to GET passwords using AJAX
+    loadAllPasswords();
 
-  // POST request:
-  $("#new-password-form").on('submit', handleSubmit);
+    //send POST request when a new password is added and prepend new entry to the list
+    $("#new-password-form").on('submit', postNewPassword);
 
+    //send POST request to delete current item from the list
+    $("#password-delete").on('submit', deleteCurrentItem);
 
-  $("#password-delete").submit(function(event) {
-    event.preventDefault()
-    const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
-    $.post('/api/passwords/delete', { password_id })
-      .then(() => {
-        loadEntry();
-      })
-  });
+    $("#password-edit").on('submit', editCurrentItem);
 
-  $("#password-edit").submit(function(event) {
-    event.preventDefault();
-    // const childrenSelector = $(event.originalEvent.submitter).parent().parent();
-    let childrenSelector = (selector) => {
-      return $(event.originalEvent.submitter).parent().parent().children(`${selector}`).text();
-    };
-    const data = {
-      id: childrenSelector('.password_id'),
-      website: childrenSelector('.password_website'),
-      username: childrenSelector('.password_username'),
-      password: childrenSelector('.password_password'),
-      hint: childrenSelector('.password_hint'),
-      category: childrenSelector('.password_category'),
-      require_master: childrenSelector('.password_require_master')
-    };
-    // console.log($(event.originalEvent.submitter).parent().parent())
-    $(event.originalEvent.submitter).parent().parent().replaceWith(editPasswords(data));
-  });
+    $("#password-edit-submit").on('submit', submitEditChanges);
 
-  $("#password-edit-submit").submit(function(event) {
-    event.preventDefault()
-
-    let siblingsSelector = (selector) => {
-      return $(event.originalEvent.submitter).parent().siblings(`${selector}`).children().val();
-    };
-
-    const data = {
-      id: $(event.originalEvent.submitter).parent().siblings('.password_id').text(),
-      website: siblingsSelector('.edit-password_website'),
-      username: siblingsSelector('.edit-password_username'),
-      password: siblingsSelector('.edit-password_password'),
-      hint: siblingsSelector('.edit-password_hint'),
-      category: siblingsSelector('.edit-password_category'),
-      require_master_password: siblingsSelector('.edit-password_require_master')
-    };
-    $.post('/api/passwords/edit', data)
-      .then(() => {
-        loadEntry();
-      })
-  });
 });
 
 
