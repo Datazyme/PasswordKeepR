@@ -195,143 +195,23 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 }
 
-// $(document).ready(function() {
-//   // step 1 target
-//   // step 2 add event listener
-//   // step 3 effect
-//   $(".test-password").submit(function(event) {
-//     event.preventDefault();
-//     const input = $(".text-box").val();
-//     $.ajax({
-//       method: "POST",
-//       url: "/api/passwords",
-//       data: input
-//     });
-//   });
-// });
-
-const getPasswords = (object) => {
-  const password = `
-  <tr>
-    <td class="password_id" style="display:none;">${object.id}</td>
-    <td class="password_website">${object.website}</td>
-    <td class="password_username">${object.username}</td>
-    <td class="password_password">${object.password}</td>
-    <td class="password_hint">${object.hint === null ? '' : object.hint}</td>
-    <td class="password_category">${object.category}</td>
-    <td class="password_require_master">${object.require_master_password}</td>
-    <td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>
-    <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
-  </tr>
-  `;
-  return password;
-};
-
-const editPasswords = (object) => {
-  const edit_box = `
-  <tr>
-    <td class="password_id" style="display:none;">${object.id}</td>
-    <td class="edit-password_website"><input type="text" placeholder="http://" value="${object.website}"></td>
-    <td class="edit-password_username"><input type="text" value="${object.username}"></td>
-    <td class="edit-password_password"><input type="text" value="${object.password}"></td>
-    <td class="edit-password_hint"><input type="text" value="${object.hint}"></td>
-    <td class="edit-password_category">
-      <select id="category-pulldown" value="${object.category}">
-      <option value="Social Media">Social Media</option>
-      <option value="Gaming">Gaming</option>
-      <option value="Work">Work</option>
-      <option value="Entertainment">Entertainment</option>
-      </select>
-    </td>
-    <td class="edit-password_require_master">
-      <select id="master-password-pulldown" value="${object.require_master}">
-      <option value=false>False</option>
-      <option value=true>True</option>
-      </select>
-    </td>
-    <td><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
-    <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
-  </tr>
-  `;
-  return edit_box;
-};
-
-
 
 // jerome's code
 $(document).ready(function() {
 
-  //helper function that returns the data in html format
+    //calls function to GET passwords using AJAX
+    loadAllPasswords();
 
+    //send POST request when a new password is added and prepend new entry to the list
+    $("#new-password-form").on('submit', postNewPassword);
 
+    //send POST request to delete current item from the list
+    $("#password-delete").on('submit', deleteCurrentItem);
 
+    $("#password-edit").on('submit', editCurrentItem);
 
-  //calls function
-  loadEntry();
+    $("#password-edit-submit").on('submit', submitEditChanges);
 
-  //GET request: pull data from api/passwords route
-  // $.get('/api/passwords')
-  //   .done(function(response) {
-  //     //loops through JSON object from api/passwords route and append every entry to the password table
-  //     for (const password of response.passwords) {
-  //       $('.passwords-container').prepend(getPasswords(password))
-  //     }
-  //   });
-
-
-  // POST request:
-  $("#new-password-form").on('submit', handleSubmit);
-
-
-  $("#password-delete").submit(function(event) {
-    event.preventDefault()
-    const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
-    $.post('/api/passwords/delete', { password_id })
-      .then(() => {
-        loadEntry();
-      })
-  });
-
-  $("#password-edit").submit(function(event) {
-    event.preventDefault();
-    // const childrenSelector = $(event.originalEvent.submitter).parent().parent();
-    let childrenSelector = (selector) => {
-      return $(event.originalEvent.submitter).parent().parent().children(`${selector}`).text();
-    };
-    const data = {
-      id: childrenSelector('.password_id'),
-      website: childrenSelector('.password_website'),
-      username: childrenSelector('.password_username'),
-      password: childrenSelector('.password_password'),
-      hint: childrenSelector('.password_hint'),
-      category: childrenSelector('.password_category'),
-      require_master: childrenSelector('.password_require_master')
-    };
-    // console.log($(event.originalEvent.submitter).parent().parent())
-    $(event.originalEvent.submitter).parent().parent().replaceWith(editPasswords(data));
-  });
-
-  $("#password-edit-submit").submit(function(event) {
-    event.preventDefault()
-
-    let siblingsSelector = (selector) => {
-      return $(event.originalEvent.submitter).parent().siblings(`${selector}`).children().val();
-    };
-
-    const data = {
-      id: $(event.originalEvent.submitter).parent().siblings('.password_id').text(),
-      website: siblingsSelector('.edit-password_website'),
-      username: siblingsSelector('.edit-password_username'),
-      password: siblingsSelector('.edit-password_password'),
-      hint: siblingsSelector('.edit-password_hint'),
-      category: siblingsSelector('.edit-password_category'),
-      require_master_password: siblingsSelector('.edit-password_require_master')
-    };
-    $.post('/api/passwords/edit', data)
-      .then(() => {
-        loadEntry();
-      })
-  });
 });
 
 
