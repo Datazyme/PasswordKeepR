@@ -15,35 +15,6 @@ const getPasswords = (object) => {
   return password;
 };
 
-const editPasswords = (object) => {
-  const edit_box = `
-  <tr>
-    <td class="password_id" style="display:none;">${object.id}</td>
-    <td class="edit-password_website"><input type="text" placeholder="http://" value="${object.website}"></td>
-    <td class="edit-password_username"><input type="text" value="${object.username}"></td>
-    <td class="edit-password_password"><input type="text" value="${object.password}"></td>
-    <td class="edit-password_hint"><input type="text" value="${object.hint}"></td>
-    <td class="edit-password_category">
-      <select id="category-pulldown" value="${object.category}">
-      <option value="Social Media">Social Media</option>
-      <option value="Gaming">Gaming</option>
-      <option value="Work">Work</option>
-      <option value="Entertainment">Entertainment</option>
-      </select>
-    </td>
-    <td class="edit-password_require_master">
-      <select id="master-password-pulldown" value="${object.require_master}">
-      <option value=false>False</option>
-      <option value=true>True</option>
-      </select>
-    </td>
-    <td><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
-    <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
-  </tr>
-  `;
-  return edit_box;
-};
-
 const loadEntry = function() {
   $.ajax('/api/passwords', { method: 'GET' })
     .then((response) => {
