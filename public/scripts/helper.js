@@ -20,12 +20,10 @@ const getPasswords = (object) => {
 const loadAllPasswords = function() {
   $.ajax('/api/passwords', { method: 'GET' })
     .then((response) => {
-      // console.log("your page is grabbing the tweets from database", response);
       //loops through JSON object from api/passwords route and append every entry to the password table
       for (const password of response.passwords) {
         $('.passwords-container').prepend(getPasswords(password));
       }
-      //(password);
     })
     .catch((err) => {
       console.log("There was an ERROR ", err);
@@ -44,7 +42,6 @@ const loadNewPassword = function(event) {
       console.log("There was an ERROR ", err);
     });
 };
-
 
 //callback function when new username and password is added
 const postNewPassword = (event) => {
@@ -82,15 +79,11 @@ const deleteCurrentItem = (event) => {
   event.preventDefault()
   const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
   const row = $(event.originalEvent.submitter).parent().parent();
-  // $(event.originalEvent.submitter).parent().parent().css('background-color', 'lightpink')
   $.post('/api/passwords/delete', {
     password_id
   })
   .then(() => {
     $(event.originalEvent.submitter).parent().parent().hide('slow').css('background-color', 'maroon')
-    // row.hide(500, function() {
-    //   this.remove();
-    // });
   })
 }
 
@@ -147,17 +140,17 @@ const submitEditChanges = (event) => {
 
     if (falsyChecker) {
       $.post('/api/passwords/edit', data)
-      .then(() => {
-        $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec')
-        // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
-        siblingsSelector('.password_website').attr('contentEditable', 'false')
-        siblingsSelector('.password_username').attr('contentEditable', 'false')
-        siblingsSelector('.password_password').attr('contentEditable', 'false')
-        siblingsSelector('.password_hint').attr('contentEditable', 'false')
-        siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
-        siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
-        siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>`)
-      })
+        .then(() => {
+          $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec')
+          // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
+          siblingsSelector('.password_website').attr('contentEditable', 'false')
+          siblingsSelector('.password_username').attr('contentEditable', 'false')
+          siblingsSelector('.password_password').attr('contentEditable', 'false')
+          siblingsSelector('.password_hint').attr('contentEditable', 'false')
+          siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
+          siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
+          siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>`)
+        })
   }
 
 }

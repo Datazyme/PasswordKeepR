@@ -195,20 +195,22 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 }
 
+
+// jerome's code
 $(document).ready(function() {
 
-  //calls function to GET passwords using AJAX
-  loadAllPasswords();
+    //calls function to GET passwords using AJAX
+    loadAllPasswords();
 
-  //send POST request when a new password is added and prepend new entry to the list
-  $("#new-password-form").on('submit', postNewPassword);
+    //send POST request when a new password is added and prepend new entry to the list
+    $("#new-password-form").on('submit', postNewPassword);
 
-  //send POST request to delete current item from the list
-  $("#password-delete").on('submit', deleteCurrentItem);
+    //send POST request to delete current item from the list
+    $("#password-delete").on('submit', deleteCurrentItem);
 
-  $("#password-edit").on('submit', editCurrentItem);
+    $("#password-edit").on('submit', editCurrentItem);
 
-  $("#password-edit-submit").on('submit', submitEditChanges);
+    $("#password-edit-submit").on('submit', submitEditChanges);
 
 });
 

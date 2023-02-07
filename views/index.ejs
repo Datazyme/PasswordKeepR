@@ -17,26 +17,41 @@
 
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
-  <!-- jerome's code -->
-  <style>
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
+<!-- jerome's code -->
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-      vertical-align: middle !important;
-    }
+  td, th {
+    border: 1px solid #f2f2f2;
+    text-align: left;
+    padding: 8px;
+    vertical-align: middle !important;
+  }
 
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
+  th {
+    color: white;
+    border: 1px solid #333;
+    background-color: #333;
+  }
 
-    </style>
+  tr:hover {
+    background-color: rgb(213, 230, 236);
+    /* background-color: rgb(198, 229, 239); */
+  }
+
+  tr {
+    background-color: #ececec;
+  }
+
+  /* tr:nth-child(even) {
+    background-color: #dddddd;
+  } */
+
+  </style>
 <!--  -->
 
 </head>
@@ -47,13 +62,20 @@
   <header>
     <h1 id="title">PasswordKeeperR</h1>
     <div id="headers">
+      <% if(user){ %>
+        <p> Logged In as : <%= user.email %> </p>
+        <form action="/logout"   method="POST" >
+         <button  type="submit"> Logout </button>
+        </form>
+          <% } else{ %>
       <Span id="buttons">
-        <form class="login" action="/login" method="post">
+          <a href="/login">
           <button id="login-button">Login</button>
-        </form>
-        <form class="register" action="/register" method="post">
-        <button id="register-button">register</button>
-        </form>
+        </a>
+        <a href="/register">
+          <button id="register-button">register</button>
+        </a>
+        <% } %>
       </Span>
     </div>
   </header>
@@ -155,22 +177,24 @@
 
 <form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
-  <select id="category-pulldown" class="new-category">
+  <select id="category-pulldown" class="new-category" required>
+    <option disabled selected value>-- Select a category --</option>
     <option value="Social Media">Social Media</option>
     <option value="Gaming">Gaming</option>
     <option value="Work">Work</option>
     <option value="Entertainment">Entertainment</option>
   </select>
   <label>Website</label>
-  <input type="text" placeholder="http://" class="new-website">
+  <input type="text" placeholder="http://" class="new-website" required>
   <label>Username</label>
-  <input type="text" class="new-username">
+  <input type="text" class="new-username" required>
   <label>Password</label>
-  <input type="text" class="new-password">
+  <input type="text" class="new-password" required>
   <label>Hint</label>
   <input type="text" class="new-hint">
   <label>Require master password?</label>
-  <select id="master-password-pulldown" class="new-require-master">
+  <select id="master-password-pulldown" class="new-require-master" required>
+    <option disabled selected value>-- Choose option --</option>
     <option value=false>False</option>
     <option value=true>True</option>
   </select>
