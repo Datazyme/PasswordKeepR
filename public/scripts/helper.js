@@ -29,6 +29,19 @@ const loadAllPasswords = function() {
     });
 };
 
+//get only the new password
+const loadNewPassword = function(event) {
+  $.ajax('/api/passwords', { method: 'GET' })
+    .then((response) => {
+      const newPassword = response.passwords[response.passwords.length - 1];
+      // loops through JSON object from api/passwords route and prepend only the new password
+      $(getPasswords(newPassword)).prependTo('.passwords-container').hide().fadeIn('slow');
+    })
+    .catch((err) => {
+      console.log("There was an ERROR ", err);
+    });
+};
+
 //callback function when new username and password is added
 const postNewPassword = (event) => {
   event.preventDefault();
