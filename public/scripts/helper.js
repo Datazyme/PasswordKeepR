@@ -108,3 +108,35 @@ const editCurrentItem = (event) => {
   <td class="edit-td"><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
   `)
 }
+
+const submitEditChanges = (event) => {
+  event.preventDefault()
+
+    let siblingsSelector = (selector) => {
+      return $(event.originalEvent.submitter).parent().siblings(`${selector}`);
+    };
+
+    const data = {
+      id: siblingsSelector('.password_id').text(),
+      website: siblingsSelector('.password_website').text(),
+      username: siblingsSelector('.password_username').text(),
+      password: siblingsSelector('.password_password').text(),
+      hint: siblingsSelector('.password_hint').text() ? siblingsSelector('.password_hint').text() : ' ',
+      category: siblingsSelector('.password_category').children().val(),
+      require_master_password: siblingsSelector('.password_require_master').children().val()
+    };
+
+    $.post('/api/passwords/edit', data)
+    .then(() => {
+      $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec')
+      // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
+      siblingsSelector('.password_website').attr('contentEditable', 'false')
+      siblingsSelector('.password_username').attr('contentEditable', 'false')
+      siblingsSelector('.password_password').attr('contentEditable', 'false')
+      siblingsSelector('.password_hint').attr('contentEditable', 'false')
+      siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
+      siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
+      siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>`)
+    })
+
+}
