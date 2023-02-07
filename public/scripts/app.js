@@ -277,8 +277,9 @@ $(document).ready(function(){
       }
     });
 
+
     // POST request:
-    $(".new-password-form").submit(function(event){
+    $("#new-password-form").submit(function(event){
       event.preventDefault()
       const user_id = 1;
       const organization_id = 1;
@@ -289,7 +290,7 @@ $(document).ready(function(){
       const username = $(".new-username").val();
       const password = $(".new-password").val();
       const hint = $(".new-hint").val();
-      const require_master_password = $(".new-master-password-requirement").val();
+      const require_master_password = $(".new-require-master").val();
       console.log('submit')
       $.post('/api/passwords',
       {
