@@ -177,22 +177,22 @@
 
 <form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
-  <select id="category-pulldown" class="new-category">
+  <select id="category-pulldown" class="new-category" required>
     <option value="Social Media">Social Media</option>
     <option value="Gaming">Gaming</option>
     <option value="Work">Work</option>
     <option value="Entertainment">Entertainment</option>
   </select>
   <label>Website</label>
-  <input type="text" placeholder="http://" class="new-website">
+  <input type="text" placeholder="http://" class="new-website" required>
   <label>Username</label>
-  <input type="text" class="new-username">
+  <input type="text" class="new-username" required>
   <label>Password</label>
-  <input type="text" class="new-password">
+  <input type="text" class="new-password" required>
   <label>Hint</label>
   <input type="text" class="new-hint">
   <label>Require master password?</label>
-  <select id="master-password-pulldown" class="new-require-master">
+  <select id="master-password-pulldown" class="new-require-master" required>
     <option value=false>False</option>
     <option value=true>True</option>
   </select>
