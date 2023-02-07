@@ -3,6 +3,7 @@ const router  = express.Router();
 const passwordGET = require('../db/queries/passwords');
 const passwordPOST = require('../db/queries/new-password');
 const passwordDELETE = require('../db/queries/delete-password');
+const passwordUPDATE = require('../db/queries/update-password');
 
 router.get('/', (req, res) => {
   // jerome's code
@@ -20,12 +21,19 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   passwordPOST.postPassword(req.body)
+  res.render('index')
 });
 
 router.post('/delete', (req, res) => {
-  console.log('route')
-  console.log(req.body)
-  // passwordDELETE.deletePassword(55)
+  passwordDELETE.deletePassword(req.body.password_id)
+  res.render('index')
+});
+
+router.post('/edit', (req, res) => {
+  // console.log('edited')
+  // console.log(req.body)
+  passwordUPDATE.updatePassword(req.body)
+  res.render('index')
 });
 
 router.get('/new', (req, res) => {
