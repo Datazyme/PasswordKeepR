@@ -365,7 +365,5 @@ $(document).ready(function() {
     $.post('/api/passwords/edit', data);
     loadEntry();
   });
-
-
 });
 
