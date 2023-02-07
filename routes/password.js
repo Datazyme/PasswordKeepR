@@ -30,8 +30,6 @@ router.post('/delete', (req, res) => {
 });
 
 router.post('/edit', (req, res) => {
-  // console.log('edited')
-  // console.log(req.body)
   passwordUPDATE.updatePassword(req.body)
   res.render('index')
 });
