@@ -85,3 +85,26 @@ const deleteCurrentItem = (event) => {
     $(event.originalEvent.submitter).parent().parent().hide('slow').css('background-color', 'maroon')
   })
 }
+
+const editCurrentItem = (event) => {
+  event.preventDefault();
+
+  let siblingsSelector = (selector) => {
+      return $(event.originalEvent.submitter).parent().siblings(`${selector}`);
+    };
+    //change current item table row color when editing
+  $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', 'lemonchiffon')
+  siblingsSelector('.password_website').attr('contentEditable', 'true')
+  siblingsSelector('.password_username').attr('contentEditable', 'true')
+  siblingsSelector('.password_password').attr('contentEditable', 'true')
+  siblingsSelector('.password_hint').attr('contentEditable', 'true')
+  siblingsSelector('.password_category').replaceWith(`
+  <td class="password_category">${$(document).find('#category-pulldown')[0].outerHTML}</td>
+  `)
+  siblingsSelector('.password_require_master').replaceWith(`
+  <td class="password_require_master">${$(document).find('#master-password-pulldown')[0].outerHTML}</td>
+  `)
+  siblingsSelector('.password_require_master').next().replaceWith(`
+  <td class="edit-td"><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
+  `)
+}
