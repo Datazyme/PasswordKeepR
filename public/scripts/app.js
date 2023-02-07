@@ -199,23 +199,7 @@ function getRandomUpper() {
 // jerome's code
 $(document).ready(function() {
 
-  //helper function that returns the data in html format
-
-
-
-
-  //calls function
   loadEntry();
-
-  //GET request: pull data from api/passwords route
-  // $.get('/api/passwords')
-  //   .done(function(response) {
-  //     //loops through JSON object from api/passwords route and append every entry to the password table
-  //     for (const password of response.passwords) {
-  //       $('.passwords-container').prepend(getPasswords(password))
-  //     }
-  //   });
-
 
   // POST request:
   $("#new-password-form").on('submit', handleSubmit);
