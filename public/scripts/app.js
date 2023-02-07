@@ -195,20 +195,6 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 }
 
-// $(document).ready(function() {
-//   // step 1 target
-//   // step 2 add event listener
-//   // step 3 effect
-//   $(".test-password").submit(function(event) {
-//     event.preventDefault();
-//     const input = $(".text-box").val();
-//     $.ajax({
-//       method: "POST",
-//       url: "/api/passwords",
-//       data: input
-//     });
-//   });
-// });
 
 const getPasswords = (object) => {
   const password = `
