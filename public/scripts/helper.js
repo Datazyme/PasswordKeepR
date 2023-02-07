@@ -73,3 +73,15 @@ const postNewPassword = (event) => {
     loadNewPassword();
   })
 }
+
+const deleteCurrentItem = (event) => {
+  event.preventDefault()
+  const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
+  const row = $(event.originalEvent.submitter).parent().parent();
+  $.post('/api/passwords/delete', {
+    password_id
+  })
+  .then(() => {
+    $(event.originalEvent.submitter).parent().parent().hide('slow').css('background-color', 'maroon')
+  })
+}
