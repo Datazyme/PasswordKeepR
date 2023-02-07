@@ -316,14 +316,43 @@ $(document).ready(function(){
 
         $("#password-edit").submit(function(event){
           event.preventDefault()
-      console.log('deleted')
-      // console.log($(this).find('.password_id').html())
-      console.log('deleted')
-      // console.log($(this).html())
-      const object_id = 'hello';
-      $.post('/api/passwords/delete', { id: object_id })
-      .done(function(response) {
-      })
-    })
+          // const childrenSelector = $(event.originalEvent.submitter).parent().parent();
+          var childrenSelector = (selector) => {
+            return $(event.originalEvent.submitter).parent().parent().children(`${selector}`).text();
+          }
+          const data = {
+            id: childrenSelector('.password_id'),
+            website: childrenSelector('.password_website'),
+            username: childrenSelector('.password_username'),
+            password: childrenSelector('.password_password'),
+            hint: childrenSelector('.password_hint'),
+            category: childrenSelector('.password_category'),
+            require_master: childrenSelector('.password_require_master')
+          }
+          // console.log($(event.originalEvent.submitter).parent().parent())
+          $(event.originalEvent.submitter).parent().parent().replaceWith(editPasswords(data))
+        });
 
-});
+        $("#password-edit-submit").submit(function(event) {
+          // event.preventDefault()
+
+          var siblingsSelector = (selector) => {
+            return $(event.originalEvent.submitter).parent().siblings(`${selector}`).children().val();
+          }
+
+          const data = {
+            id: $(event.originalEvent.submitter).parent().siblings('.password_id').text(),
+            website: siblingsSelector('.edit-password_website'),
+            username: siblingsSelector('.edit-password_username'),
+            password: siblingsSelector('.edit-password_password'),
+            hint: siblingsSelector('.edit-password_hint'),
+            category: siblingsSelector('.edit-password_category'),
+            require_master_password: siblingsSelector('.edit-password_require_master')
+          }
+
+          $.post('/api/passwords/edit', data)
+        });
+
+
+      });
+
