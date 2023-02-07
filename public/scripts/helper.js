@@ -15,15 +15,14 @@ const getPasswords = (object) => {
   return password;
 };
 
-const loadEntry = function() {
+//load all passwords asynchronously
+const loadAllPasswords = function() {
   $.ajax('/api/passwords', { method: 'GET' })
     .then((response) => {
-      console.log("your page is grabbing the tweets from database", response);
       //loops through JSON object from api/passwords route and append every entry to the password table
       for (const password of response.passwords) {
         $('.passwords-container').prepend(getPasswords(password));
       }
-      //(password);
     })
     .catch((err) => {
       console.log("There was an ERROR ", err);
