@@ -47,13 +47,20 @@
   <header>
     <h1 id="title">PasswordKeeperR</h1>
     <div id="headers">
+      <% if(user){ %>
+        <p> Logged In as : <%= user.email %> </p>
+        <form action="/logout"   method="POST" >
+         <button  type="submit"> Logout </button>
+        </form>
+          <% } else{ %>
       <Span id="buttons">
-        <form class="login" action="/login" method="post">
+          <a href="/login">
           <button id="login-button">Login</button>
-        </form>
-        <form class="register" action="/register" method="post">
-        <button id="register-button">register</button>
-        </form>
+        </a>
+        <a href="/register">
+          <button id="register-button">register</button>
+        </a>
+        <% } %>
       </Span>
     </div>
   </header>
