@@ -254,12 +254,17 @@ $(document).ready(function(){
         <option value="Entertainment">Entertainment</option>
         </select>
       </td>
-      <td>
-      <button class="password-delete">Delete</button>
+      <td class="edit-password_require_master">
+        <select id="master-password-pulldown" value="${object.require_master}">
+        <option value=false>False</option>
+        <option value=true>True</option>
+        </select>
       </td>
+      <td><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
+      <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
     </tr>
     `;
-    return password;
+    return edit_box;
   };
 
 
