@@ -305,23 +305,17 @@ $(document).ready(function(){
         category,
         require_master_password
       })
-      .done(function(response) {
-        // code ASYNC load here
-        // $.get('/api/passwords')
-        //   .done(response => {
-        //     $('.passwords-container').prepend(getPasswords(response))
-        //     $('.passwords-container').slideDown();
-        //   })
-      })
-    });
+        });
 
-    $(".password-delete").on("click", function() {
-      console.log('hello')
-      console.log($(this).text());
-    })
 
-    $(".password-delete").submit(function(event){
-      event.preventDefault()
+        $("#password-delete").submit(function(event){
+          // event.preventDefault()
+          const password_id = $(event.originalEvent.submitter).parent().siblings('.password_id').text();
+          $.post('/api/passwords/delete', { password_id })
+        });
+
+        $("#password-edit").submit(function(event){
+          event.preventDefault()
       console.log('deleted')
       // console.log($(this).find('.password_id').html())
       console.log('deleted')
