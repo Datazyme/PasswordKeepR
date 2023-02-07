@@ -224,17 +224,35 @@ $(document).ready(function(){
   const getPasswords = (object) => {
     const password = `
     <tr>
-      <td class="password_id">${object.id}</td>
-      <td>${object.website}</td>
-      <td>${object.username}</td>
-      <td>${object.password}</td>
-      <td>${object.hint}</td>
-      <td>${object.category}</td>
-      <td>${object.require_master_password}</td>
-      <td>
-        <form class="password-edit" action="/api/passwords/edit" method="post">
-          <input type="submit" value="Edit">
-        </form>
+      <td class="password_id" style="display:none;">${object.id}</td>
+      <td class="password_website">${object.website}</td>
+      <td class="password_username">${object.username}</td>
+      <td class="password_password">${object.password}</td>
+      <td class="password_hint">${object.hint === null ? '' : object.hint}</td>
+      <td class="password_category">${object.category}</td>
+      <td class="password_require_master">${object.require_master_password}</td>
+      <td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>
+      <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
+    </tr>
+    `;
+    return password;
+  };
+
+  const editPasswords = (object) => {
+    const edit_box = `
+    <tr>
+      <td class="password_id" style="display:none;">${object.id}</td>
+      <td class="edit-password_website"><input type="text" placeholder="http://" value="${object.website}"></td>
+      <td class="edit-password_username"><input type="text" value="${object.username}"></td>
+      <td class="edit-password_password"><input type="text" value="${object.password}"></td>
+      <td class="edit-password_hint"><input type="text" value="${object.hint}"></td>
+      <td class="edit-password_category">
+        <select id="category-pulldown" value="${object.category}">
+        <option value="Social Media">Social Media</option>
+        <option value="Gaming">Gaming</option>
+        <option value="Work">Work</option>
+        <option value="Entertainment">Entertainment</option>
+        </select>
       </td>
       <td>
       <button class="password-delete">Delete</button>
