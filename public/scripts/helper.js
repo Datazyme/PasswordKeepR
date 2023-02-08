@@ -45,7 +45,6 @@ const loadNewPassword = function(event) {
 //callback function when new username and password is added
 const postNewPassword = (event) => {
   event.preventDefault();
-  const user_id = 1;
   const organization_id = 1;
   const role_id = 3;
   const is_user_created = true;
@@ -58,7 +57,6 @@ const postNewPassword = (event) => {
   // console.log('submit')
   $.post('/api/passwords',
   {
-    user_id,
     organization_id,
     role_id,
     is_user_created,
