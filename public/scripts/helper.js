@@ -1,3 +1,4 @@
+//helper function that returns the data in html format
 const getPasswords = (object) => {
   const password = `
   <tr>
@@ -10,6 +11,7 @@ const getPasswords = (object) => {
     <td class="password_require_master">${object.require_master_password}</td>
     <td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>
     <td><input type="submit" value="Delete" form="password-delete" class="delete-button"></td>
+
   </tr>
   `;
   return password;
@@ -125,7 +127,6 @@ const submitEditChanges = (event) => {
       category: siblingsSelector('.password_category').children().val(),
       require_master_password: siblingsSelector('.password_require_master').children().val()
     };
-
 
     let falsyChecker = true;
 
