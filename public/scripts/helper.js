@@ -96,7 +96,7 @@ const editCurrentItem = (event) => {
   $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', 'lemonchiffon')
   siblingsSelector('.password_website').attr('contentEditable', 'true')
   siblingsSelector('.password_username').attr('contentEditable', 'true')
-  siblingsSelector('.password_password').attr('contentEditable', 'true')
+  siblingsSelector('.password_password').attr('contentEditable', 'true').css('-webkit-text-security', 'none')
   siblingsSelector('.password_hint').attr('contentEditable', 'true')
   siblingsSelector('.password_category').replaceWith(`
   <td class="password_category">${$(document).find('#category-pulldown')[0].outerHTML}</td>
@@ -145,7 +145,7 @@ const submitEditChanges = (event) => {
           // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
           siblingsSelector('.password_website').attr('contentEditable', 'false')
           siblingsSelector('.password_username').attr('contentEditable', 'false')
-          siblingsSelector('.password_password').attr('contentEditable', 'false')
+          siblingsSelector('.password_password').attr('contentEditable', 'false').css('-webkit-text-security', 'square')
           siblingsSelector('.password_hint').attr('contentEditable', 'false')
           siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
           siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
