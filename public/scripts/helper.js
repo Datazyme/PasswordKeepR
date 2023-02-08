@@ -8,8 +8,8 @@ const getPasswords = (object) => {
     <td class="password_hint">${object.hint === null ? '' : object.hint}</td>
     <td class="password_category">${object.category}</td>
     <td class="password_require_master">${object.require_master_password}</td>
-    <td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>
-    <td><input type="submit" value="Delete" form="password-delete" id="delete-button"></td>
+    <td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>
+    <td><input type="submit" value="Delete" form="password-delete" class="delete-button"></td>
   </tr>
   `;
   return password;
@@ -105,7 +105,7 @@ const editCurrentItem = (event) => {
   <td class="password_require_master">${$(document).find('#master-password-pulldown')[0].outerHTML}</td>
   `)
   siblingsSelector('.password_require_master').next().replaceWith(`
-  <td class="edit-td"><input type="submit" value="Done" form="password-edit-submit" id="submit-edit-button"></td>
+  <td class="edit-td"><input type="submit" value="Done" form="password-edit-submit" class="submit-edit-button"></td>
   `)
 }
 
@@ -149,7 +149,7 @@ const submitEditChanges = (event) => {
           siblingsSelector('.password_hint').attr('contentEditable', 'false')
           siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
           siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
-          siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" id="edit-button"></td>`)
+          siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>`)
         })
   }
 
