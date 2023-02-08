@@ -17,7 +17,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
   rolling: true
 }))
-// download cookie session
 
 app.set('view engine', 'ejs');
 
