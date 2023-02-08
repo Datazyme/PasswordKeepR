@@ -1,7 +1,7 @@
 const db = require('../connection');
 
-const getPasswords = () => {
-  return db.query('SELECT * FROM credentials ORDER BY id;')
+const getPasswords = (object) => {
+  return db.query('SELECT * FROM credentials WHERE user_id = $1 ORDER BY id', [object.id])
     .then(data => {
       return data.rows;
     });
