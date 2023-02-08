@@ -26,7 +26,6 @@ function UserHelper(users) {
 
     // to register a new user
     registerUser: function (email, password) {
-      console.log(users)
       const id = this.generateId();
       users[id] = { id, email, password }
 

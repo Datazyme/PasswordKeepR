@@ -1,7 +1,11 @@
 // Client facing scripts here
 // refactor it to jquery
-document.getElementById("New_Account").addEventListener("click", function() {
-  let formElements = [    {      title: 'Website',      placeholder: 'Website'    },    {      title: 'Username',      placeholder: 'Username'    },    {      title: 'Password',      placeholder: 'Password'    }  ];
+document.getElementById("New_Account").addEventListener("click", function () {
+  let formElements = [
+    { title: "Website", placeholder: "Website" },
+    { title: "Username", placeholder: "Username" },
+    { title: "Password", placeholder: "Password" },
+  ];
 
   let midSection = document.createElement("div");
   midSection.setAttribute("class", "mid_section");
@@ -18,7 +22,7 @@ document.getElementById("New_Account").addEventListener("click", function() {
   select.innerHTML = options;
   midSection.appendChild(select);
 
-  formElements.forEach(function(formElement, index) {
+  formElements.forEach(function (formElement, index) {
     let div = document.createElement("span");
     div.setAttribute("class", `div${index + 1}`);
 
@@ -55,15 +59,14 @@ document.getElementById("New_Account").addEventListener("click", function() {
   document.body.appendChild(midSection);
 });
 
-
 // copy button listener
-let clipboard = new ClipboardJS('#copy-button');
+let clipboard = new ClipboardJS("#copy-button");
 
-clipboard.on('success', function(e) {
+clipboard.on("success", function (e) {
   console.log(e);
 });
 
-clipboard.on('error', function(e) {
+clipboard.on("error", function (e) {
   console.log(e);
 });
 
@@ -78,11 +81,11 @@ function submitForm(event, div) {
   const input = document.querySelector(`#${div} form .div-input`);
   const output = document.querySelector(`#${div}-output`);
   output.innerHTML = input.value;
-  input.style.display = 'none';
-  output.style.display = 'block';
+  input.style.display = "none";
+  output.style.display = "block";
 }
 
-document.querySelector(".add").addEventListener("click", function() {
+document.querySelector(".add").addEventListener("click", function () {
   console.log("test");
 });
 
@@ -98,7 +101,7 @@ const generateBtn = document.querySelector("#generate");
 // const copyPass = document.querySelector("#copy");
 
 // Listen for checkbox ticked and length
-includeNumbers.addEventListener('change', function() {
+includeNumbers.addEventListener("change", function () {
   if (this.checked) {
     console.log("Checkbox is checked..");
   } else {
@@ -106,7 +109,7 @@ includeNumbers.addEventListener('change', function() {
   }
 });
 
-includeSymbols.addEventListener('change', function() {
+includeSymbols.addEventListener("change", function () {
   if (this.checked) {
     console.log("Checkbox is checked..");
   } else {
@@ -114,7 +117,7 @@ includeSymbols.addEventListener('change', function() {
   }
 });
 
-includeUppercase.addEventListener('change', function() {
+includeUppercase.addEventListener("change", function () {
   if (this.checked) {
     console.log("Checkbox is checked..");
   } else {
@@ -122,7 +125,7 @@ includeUppercase.addEventListener('change', function() {
   }
 });
 
-includeLowercase.addEventListener('change', function() {
+includeLowercase.addEventListener("change", function () {
   if (this.checked) {
     console.log("Checkbox is checked..");
   } else {
@@ -139,7 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let onLoadSymbols = includeSymbols.checked;
   let onLoadUpperCase = includeUppercase.checked;
   let onLoadLowerCase = includeLowercase.checked;
-  result.value = randomPassword(onLoadLowerCase, onLoadUpperCase, onLoadNumbers, onLoadSymbols, onLoadLength);
+  result.value = randomPassword(
+    onLoadLowerCase,
+    onLoadUpperCase,
+    onLoadNumbers,
+    onLoadSymbols,
+    onLoadLength
+  );
 });
 // Listen for password range change
 passLength.addEventListener("change", (event) => {
@@ -195,24 +204,18 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 }
 
-
 // jerome's code
-$(document).ready(function() {
+$(document).ready(function () {
+  //calls function to GET passwords using AJAX
+  loadAllPasswords();
 
-    //calls function to GET passwords using AJAX
-    loadAllPasswords();
+  //send POST request when a new password is added and prepend new entry to the list
+  $("#new-password-form").on("submit", postNewPassword);
 
-    //send POST request when a new password is added and prepend new entry to the list
-    $("#new-password-form").on('submit', postNewPassword);
+  //send POST request to delete current item from the list
+  $("#password-delete").on("submit", deleteCurrentItem);
 
-    //send POST request to delete current item from the list
-    $("#password-delete").on('submit', deleteCurrentItem);
+  $("#password-edit").on("submit", editCurrentItem);
 
-    $("#password-edit").on('submit', editCurrentItem);
-
-    $("#password-edit-submit").on('submit', submitEditChanges);
-
+  $("#password-edit-submit").on("submit", submitEditChanges);
 });
-
-
-
