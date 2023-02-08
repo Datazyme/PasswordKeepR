@@ -51,6 +51,10 @@
     background-color: #dddddd;
   } */
 
+  .password_password {
+    -webkit-text-security: square; /* Default */
+  }
+
   </style>
 <!--  -->
 
@@ -62,7 +66,7 @@
   <header>
     <h1 id="title">PasswordKeeperR</h1>
     <div id="headers">
-      <% if(user){ %>
+      <!-- <% if(user){ %>
         <p> Logged In as : <%= user.email %> </p>
         <form action="/logout"   method="POST" >
          <button  type="submit"> Logout </button>
@@ -75,7 +79,7 @@
         <a href="/register">
           <button id="register-button">register</button>
         </a>
-        <% } %>
+        <% } %> -->
       </Span>
     </div>
   </header>
@@ -189,7 +193,7 @@
   <label>Username</label>
   <input type="text" class="new-username" required>
   <label>Password</label>
-  <input type="text" class="new-password" required>
+  <input type="password" class="new-password" required>
   <label>Hint</label>
   <input type="text" class="new-hint">
   <label>Require master password?</label>
