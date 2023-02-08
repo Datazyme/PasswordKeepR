@@ -4,11 +4,23 @@ const passwordGET = require('../db/queries/passwords');
 const passwordPOST = require('../db/queries/new-password');
 const passwordDELETE = require('../db/queries/delete-password');
 const passwordUPDATE = require('../db/queries/update-password');
+const cookieSession = require("cookie-session");
+const { users } = require("../utilities/db.js");
+const userHelper = require("../utilities/userHelper.js")(users);
+
+router.use(cookieSession({
+  name: 'session',
+  keys: ["key1", "key2"],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  rolling: true
+}))
 
 router.get('/', (req, res) => {
   // jerome's code
   //passwordQueries runs the query in /db/queries/passwords.js then converts the returned data into JSON format
-  passwordGET.getPasswords()
+  const userId = { id: req.session.user_id }
+  console.log(req.session.user_id)
+  passwordGET.getPasswords(userId)
     .then(passwords => {
       res.json({ passwords });
     })
@@ -20,18 +32,27 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  passwordPOST.postPassword(req.body)
-  res.render('index')
+  passwordPOST.postPassword(req.body, req.session.user_id)
+  const templatevars = {
+    user: userHelper.getUserById(req.session.user_id, users)
+  }
+  res.render('index', templatevars)
 });
 
 router.post('/delete', (req, res) => {
   passwordDELETE.deletePassword(req.body.password_id)
-  res.render('index')
+  const templatevars = {
+    user: userHelper.getUserById(req.session.user_id, users)
+  }
+  res.render('index', templatevars)
 });
 
 router.post('/edit', (req, res) => {
   passwordUPDATE.updatePassword(req.body)
-  res.render('index')
+  const templatevars = {
+    user: userHelper.getUserById(req.session.user_id, users)
+  }
+  res.render('index', templatevars)
 });
 
 router.get('/new', (req, res) => {
