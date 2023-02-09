@@ -4,16 +4,7 @@ const passwordGET = require('../db/queries/passwords');
 const passwordPOST = require('../db/queries/new-password');
 const passwordDELETE = require('../db/queries/delete-password');
 const passwordUPDATE = require('../db/queries/update-password');
-const cookieSession = require("cookie-session");
-const { users } = require("../utilities/db.js");
-const userHelper = require("../utilities/userHelper.js")(users);
-
-router.use(cookieSession({
-  name: 'session',
-  keys: ["key1", "key2"],
-  maxAge: 24 * 60 * 60 * 1000, // 24 hours
-  rolling: true
-}))
+const user = require('../db/queries/getUserInfo.js');
 
 router.get('/', (req, res) => {
   // jerome's code
