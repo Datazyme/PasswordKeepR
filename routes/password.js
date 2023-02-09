@@ -24,26 +24,35 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   passwordPOST.postPassword(req.body, req.session.user_id)
-  const templatevars = {
-    user: userHelper.getUserById(req.session.user_id, users)
-  }
-  res.render('index', templatevars)
+  user.getUser(req.session.user_id)
+    .then((response) => {
+      const templatevars = {
+        user: response[0]
+      }
+      res.render("index", templatevars);
+    })
 });
 
 router.post('/delete', (req, res) => {
   passwordDELETE.deletePassword(req.body.password_id)
-  const templatevars = {
-    user: userHelper.getUserById(req.session.user_id, users)
-  }
-  res.render('index', templatevars)
+  user.getUser(req.session.user_id)
+    .then((response) => {
+      const templatevars = {
+        user: response[0]
+      }
+      res.render("index", templatevars);
+    })
 });
 
 router.post('/edit', (req, res) => {
   passwordUPDATE.updatePassword(req.body)
-  const templatevars = {
-    user: userHelper.getUserById(req.session.user_id, users)
-  }
-  res.render('index', templatevars)
+  user.getUser(req.session.user_id)
+  .then((response) => {
+    const templatevars = {
+      user: response[0]
+    }
+    res.render("index", templatevars);
+  })
 });
 
 router.get('/new', (req, res) => {
