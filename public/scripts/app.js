@@ -48,14 +48,6 @@ document.getElementById("New_Account").addEventListener("click", function () {
     midSection.appendChild(div);
   });
 
-  let buttons = `
-    <span class="div4">
-      <button class="add">Add</button>
-      <button class="edit">Edit</button>
-    </span>
-  `;
-  midSection.insertAdjacentHTML("beforeend", buttons);
-
   document.body.appendChild(midSection);
 });
 
@@ -85,7 +77,7 @@ function submitForm(event, div) {
   output.style.display = "block";
 }
 
-document.querySelector(".add").addEventListener("click", function () {
+document.querySelector(".passwords-container").addEventListener("click", function () {
   console.log("test");
 });
 
