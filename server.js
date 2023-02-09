@@ -60,42 +60,16 @@ app.use('/register', registerRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
+  console.log('fire')
   const templatevars = {
     user: userHelper.getUserById(req.session.user_id, users)
   }
+  console.log('templatevars', templatevars);
   res.render("index", templatevars);
 });
 
 
-// login routes
-app.get('/login', (req, res) => {
-  if (req.session.user_id) {
-    return res.redirect("/");
-  }
-  const templatevars = {
-    user: null,
-  };
-  res.render('login', templatevars);
-});
 
-app.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user = userHelper.getUserByEmail(email, users);
-
-  console.log(req.body)
-  if (!email || !password) {
-    return res.status(400).send("Please provide a valid email and password");
-  }
-  if (!user) {
-    return res.status(400).send("No user found with that email");
-  }
-  if (user.password !== password) {
-    return res.status(400).send("Incorrect password");
-  }
-  req.session.user_id = user.id;
-  res.redirect("/");
-});
 
 // Register page
 app.get("/register", (req, res) => {
