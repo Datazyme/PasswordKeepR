@@ -3,6 +3,7 @@ const getPasswords = (object) => {
   const password = `
   <tr>
     <td class="password_id" style="display:none;">${object.id}</td>
+    <td class"credential_type">${object.is_user_created === true ? 'Personal' : `Organization -> ${object.organizations_name}`}</td>
     <td class="password_website">${object.website}</td>
     <td class="password_username">${object.username}</td>
     <td class="password_password">${object.password}</td>
