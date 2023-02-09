@@ -8,10 +8,8 @@ const getPasswords = (object) => {
     <td class="password_password">${object.password}</td>
     <td class="password_hint">${object.hint === null ? '' : object.hint}</td>
     <td class="password_category">${object.category}</td>
-    <td class="password_require_master">${object.require_master_password}</td>
     <td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>
     <td><input type="submit" value="Delete" form="password-delete" class="delete-button"></td>
-
   </tr>
   `;
   return password;
@@ -55,7 +53,6 @@ const postNewPassword = (event) => {
   const username = $(".new-username").val();
   const password = $(".new-password").val();
   const hint = $(".new-hint").val();
-  const require_master_password = $(".new-require-master").val();
   // console.log('submit')
   $.post('/api/passwords',
   {
@@ -67,7 +64,6 @@ const postNewPassword = (event) => {
     password,
     hint,
     category,
-    require_master_password
   })
   .then(() =>{
     loadNewPassword();
@@ -101,10 +97,7 @@ const editCurrentItem = (event) => {
   siblingsSelector('.password_category').replaceWith(`
   <td class="password_category">${$(document).find('#category-pulldown')[0].outerHTML}</td>
   `)
-  siblingsSelector('.password_require_master').replaceWith(`
-  <td class="password_require_master">${$(document).find('#master-password-pulldown')[0].outerHTML}</td>
-  `)
-  siblingsSelector('.password_require_master').next().replaceWith(`
+  siblingsSelector('.password_category').next().replaceWith(`
   <td class="edit-td"><input type="submit" value="Done" form="password-edit-submit" class="submit-edit-button"></td>
   `)
 }
@@ -123,7 +116,6 @@ const submitEditChanges = (event) => {
       password: siblingsSelector('.password_password').text(),
       hint: siblingsSelector('.password_hint').text() ? siblingsSelector('.password_hint').text() : ' ',
       category: siblingsSelector('.password_category').children().val(),
-      require_master_password: siblingsSelector('.password_require_master').children().val()
     };
 
     let falsyChecker = true;
@@ -147,8 +139,7 @@ const submitEditChanges = (event) => {
           siblingsSelector('.password_password').attr('contentEditable', 'false').css('-webkit-text-security', 'square')
           siblingsSelector('.password_hint').attr('contentEditable', 'false')
           siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
-          siblingsSelector('.password_require_master').replaceWith(`<td class="password_require_master">${data.require_master_password}</td>`)
-          siblingsSelector('.password_require_master').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>`)
+          siblingsSelector('.password_category').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>`)
         })
   }
 
