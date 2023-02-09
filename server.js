@@ -5,12 +5,14 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const PORT = process.env.PORT || 8080;
+const app = express();
 const { users } = require("./utilities/db.js");
 const userHelper = require("./utilities/userHelper.js")(users);
-const PORT = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
-const app = express();
 const cookieSession = require("cookie-session");
+const user = require('./db/queries/getUserInfo.js');
+
 app.use(cookieSession({
   name: 'session',
   keys: ["key1", "key2"],
@@ -59,81 +61,113 @@ app.use('/register', registerRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const templatevars = {
-    user: userHelper.getUserById(req.session.user_id, users)
-  }
-  res.render("index", templatevars);
-});
+  user.getUser(req.session.user_id)
+  .then((response) => {
+    const templatevars = {
+      user: response[0]
+    }
+    res.render("index", templatevars);
+  })
+  // const templatevars = {
+    //   user: userHelper.getUserById(req.session.user_id, users)
+    // }
+  });
 
-
-// login routes
-app.get('/login', (req, res) => {
-  if (req.session.user_id) {
-    return res.redirect("/");
-  }
-  const templatevars = {
-    user: null,
-  };
-  res.render('login', templatevars);
-});
-
-app.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user = userHelper.getUserByEmail(email, users);
-
-  console.log(req.body)
-  if (!email || !password) {
-    return res.status(400).send("Please provide a valid email and password");
-  }
-  if (!user) {
-    return res.status(400).send("No user found with that email");
-  }
-  if (user.password !== password) {
-    return res.status(400).send("Incorrect password");
-  }
-  req.session.user_id = user.id;
-  res.redirect("/");
-});
-
-// Register page
-app.get("/register", (req, res) => {
-  if (req.session.user_id) {
+  // POST /logout
+  app.post("/logout", (req, res) => {
+    req.session = null;
     res.redirect("/");
-    return;
-  }
-  const templatevars = { user: null};
-  res.render("register", templatevars);
-});
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`);
+  });
+
+// // login routes
+// app.get('/login', (req, res) => {
+//   if (req.session.user_id) {
+//     return res.redirect("/");
+//   }
+//   const templatevars = {
+//     user: null,
+//   };
+//   res.render('login', templatevars);
+// });
+
+// app.post('/login', (req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const user = userHelper.getUserByEmail(email, users);
+
+//   if (!email || !password) {
+//     return res.status(400).send("Please provide a valid email and password");
+//   }
+
+//   login.getUserLogin({email, password})
+//     .then((response) => {
+//       if (response.length === 0) {
+//         return res.status(400).send("Incorrect email/password or no user found with that account!");
+//       }
+//       req.session.user_id = response[0].user_id;
+//       res.redirect("/");
+//     })
+
+//   // console.log(req.body)
+//   // if (!user) {
+//   //   return res.status(400).send("No user found with that email");
+//   // }
+//   // if (user.password !== password) {
+//   //   return res.status(400).send("Incorrect password");
+//   // }
+// });
+
+// // Register page
+// app.get("/register", (req, res) => {
+//   if (req.session.user_id) {
+//     res.redirect("/");
+//     return;
+//   }
+//   const templatevars = { user: null};
+//   res.render("register", templatevars);
+// });
 
 
 
-app.post("/register", (req, res) => {
-  const userEmail = req.body.email;
-  const password = req.body.password;
+// app.post("/register", (req, res) => {
 
-  if (!userEmail || !password) {
-    return res.status(400).send("please provide an email and a password");
-  }
-  if (userHelper.getUserByEmail(userEmail, users)) {
-    return res.status(400).send("Email is already registered");
-  }
+//   console.log(req.body);
 
-  const user = userHelper.registerUser(userEmail, password)
-  req.session.user_id = user.id;
-  res.redirect("/")
-});
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   const organization_id = req.body.organization;
 
 
+//   if (!email || !password) {
+//     return res.status(400).send("Please provide a valid email and password");
+//   }
 
-// POST /logout
-app.post("/logout", (req, res) => {
-  req.session = null;
-  res.redirect("/");
-});
+//   check.ifEmailExist(email)
+//     .then((response) => {
+//     const registerEmailCheck = response.length === 0 ? null : response[0].email;
+//       if (registerEmailCheck === email) {
+//         return res.status(400).send("Email is already registered!");
+//       }
+//       register.registerUser({organization_id, email, password})
+//         .then((response) => {
+//           console.log(response)
+//           req.session.user_id = response[0].id;
+//           res.redirect("/")
+//       })
+//   })
+
+//   // if (userHelper.getUserByEmail(userEmail, users)) {
+//   //   return res.status(400).send("Email is already registered");
+//   // }
+
+//   // const user = userHelper.registerUser(userEmail, password)
+//   // req.session.user_id = user.id;
+//   // res.redirect("/")
+// });
 
 
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
