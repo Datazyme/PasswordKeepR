@@ -1,11 +1,13 @@
 module.exports = {
   users: {
-    userRandomID: {
+    '1': {
+    org: 'Kwimbee',
     id: "1",
-    email: "user@example.com",
-    password: "purple-monkey-dinosaur",
+    email: "a@a.com",
+    password: "1234",
   },
   user2RandomID: {
+    org: 'Photofeed',
     id: "2",
     email: "user2@example.com",
     password: "dishwasher-funk",
