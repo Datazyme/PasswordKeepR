@@ -120,61 +120,9 @@
       </div>
     </div>
     <button class="generate-btn" id="generate">Generate</button>
+
+
   </div>
-
-
-
-<br>
-<br>
-  <div id="New">
-    <button id="New_Account">New Account</button>
-    <br>
-    <div class="mid_section">
-      <select id="pulldown">
-        <option value="">Select a category</option>
-        <option value="social media">Social Media</option>
-        <option value="gaming">Gaming</option>
-        <option value="work">Work</option>
-        <option value="entertainment">Entertainment</option>
-      </select>
-      <span class="div1">
-                <h3>Website </h3>
-          <input type="text" class="div-input" placeholder="Website" id="div1-input">
-        <div id="div1-output" style="display: none"></div>
-      </span>
-      <span class="div2">
-        <h4>Username</h4>
-          <input type="text" class="div-input" placeholder="Username" id="div2-input">
-        <div id="div2-output" style="display: none"></div>
-      </span>
-      <span class="div3">
-        <h4>Password</h4>
-          <input type="text" class="div-input" placeholder="Password" id="div3-input">
-        <div id="div3-output" style="display: none"></div>
-      </span>
-      <span class="div4">
-        <button class="add">Add</button>
-        <button class="edit">Edit</button>
-      </span>
-    </div>
-
-
-</div>
-
-
-
-
-
-
-
-<div>
-  <form class="test-password" action="/api/passwords" method="post">
-    <input class="text-box" type="text">
-    <button>submit</button>
-  </form>
-
-</div>
-
 <!-- jerome's code -->
 <br>
 <br>
@@ -203,27 +151,37 @@
   <input type="submit" value="Submit">
 </form>
 <br>
-
-<table>
-  <thead>
-    <tr>
-      <th style="display:none;">#</th>
-      <th>Credential Type</th>
-      <th>Website</th>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Hint (optional)</th>
-      <th>Category</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <!-- placeholder for passwords data -->
-  <tbody class="passwords-container">
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th style="display:none;">#</th>
+        <th>Credential Type</th>
+        <th>Website</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Hint (optional)</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <!-- placeholder for passwords data -->
+    <tbody id="New_Account" class="passwords-container">
+    </tbody>
+  </table>
+</body>
 <script defer src="/scripts/helper.js"></script>
 <script defer src="/scripts/app.js"></script>
-</body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
