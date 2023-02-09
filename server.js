@@ -81,8 +81,6 @@ app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const user = userHelper.getUserByEmail(email, users);
-
-  console.log(req.body)
   if (!email || !password) {
     return res.status(400).send("Please provide a valid email and password");
   }
