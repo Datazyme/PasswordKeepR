@@ -81,6 +81,7 @@ const deleteCurrentItem = (event) => {
   .then(() => {
     $(event.originalEvent.submitter).parent().parent().hide('slow').css('background-color', 'maroon')
   })
+  }
 }
 
 const editCurrentItem = (event) => {
