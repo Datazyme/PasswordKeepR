@@ -200,12 +200,6 @@
   <input type="password" class="new-password" required>
   <label>Hint</label>
   <input type="text" class="new-hint">
-  <label>Require master password?</label>
-  <select id="master-password-pulldown" class="new-require-master" required>
-    <option disabled selected value>-- Choose option --</option>
-    <option value=false>False</option>
-    <option value=true>True</option>
-  </select>
   <input type="submit" value="Submit">
 </form>
 <br>
@@ -214,12 +208,12 @@
   <thead>
     <tr>
       <th style="display:none;">#</th>
+      <th>Credential Type</th>
       <th>Website</th>
       <th>Username</th>
       <th>Password</th>
       <th>Hint (optional)</th>
       <th>Category</th>
-      <th>Require Master Password</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
