@@ -16,8 +16,16 @@ header {
   justify-content: center;
 }
 
+@keyframes logo {
+  from {color: rgb(9, 0, 0);}
+  to {color: yellow;}
+}
+
 #title {
-  text-align: center;
+  height: 20px;
+  width: 150px;
+  animation-name: logo;
+  animation-duration: 4s;
 }
 
 #headers {
@@ -45,15 +53,14 @@ header {
 }
 
 .main{
-  background-color: #830000;
-  height: 250px;
+  background-color: #6d5fc8;
+  height: 300px;
   width: 500px;
   justify-content: center;
-  margin-left: 0;
+  margin-top: 0.5in;
+  padding-left: 0.75in;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
-
-
 
 output{
   font-family: 'Roboto', sans-serif;
@@ -74,9 +81,6 @@ output{
 ul {
 list-style-type: none;
  }
-
-
-
 
 // buttons
 
@@ -149,11 +153,6 @@ button {
   margin-bottom: 5px;
 }
 
-#title{
-  height: 20px;
-  width: 150px;
-  color:rgb(0, 0, 0);
-}
 
 .div1, .div2, .div3 {
     display: flex;

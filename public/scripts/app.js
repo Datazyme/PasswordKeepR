@@ -1,11 +1,7 @@
 // Client facing scripts here
 // refactor it to jquery
 document.getElementById("New_Account").addEventListener("click", function () {
-  let formElements = [
-    { title: "Website", placeholder: "Website" },
-    { title: "Username", placeholder: "Username" },
-    { title: "Password", placeholder: "Password" },
-  ];
+
 
   let midSection = document.createElement("div");
   midSection.setAttribute("class", "mid_section");
