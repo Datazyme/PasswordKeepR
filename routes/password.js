@@ -1,17 +1,13 @@
 const express = require('express');
 const router  = express.Router();
-const passwordGET = require('../db/queries/passwords');
-const passwordPOST = require('../db/queries/new-password');
-const passwordDELETE = require('../db/queries/delete-password');
-const passwordUPDATE = require('../db/queries/update-password');
-const user = require('../db/queries/getUserInfo.js');
+const passwordHelperFunctions = require('../db/queries/passwords.js');
+const loginHelperFunctions = require('../db/queries/login.js')
 
+// sends a GET request to pull stored username and passwords from the database for the logged in user then converts the returned data to JSON
 router.get('/', (req, res) => {
-  // jerome's code
-  //passwordQueries runs the query in /db/queries/passwords.js then converts the returned data into JSON format
   const userId = { id: req.session.user_id }
   console.log(req.session.user_id)
-  passwordGET.getPasswords(userId)
+  passwordHelperFunctions.getPasswords(userId)
     .then(passwords => {
       res.json({ passwords });
     })
@@ -22,9 +18,11 @@ router.get('/', (req, res) => {
     });
 });
 
+// sends a POST request query to seed new website username and password to database
 router.post('/', (req, res) => {
-  passwordPOST.postPassword(req.body, req.session.user_id)
-  user.getUser(req.session.user_id)
+  passwordHelperFunctions.postPassword(req.body, req.session.user_id)
+  // helper function to provide current logged in user email to templatevars
+  loginHelperFunctions.getEmail(req.session.user_id)
     .then((response) => {
       const templatevars = {
         user: response[0]
@@ -33,9 +31,11 @@ router.post('/', (req, res) => {
     })
 });
 
+// sends a POST request query to delete the selected username and password from the database
 router.post('/delete', (req, res) => {
-  passwordDELETE.deletePassword(req.body.password_id)
-  user.getUser(req.session.user_id)
+  passwordHelperFunctions.deletePassword(req.body.password_id)
+  // helper function to provide current logged in user email to templatevars
+  loginHelperFunctions.getEmail(req.session.user_id)
     .then((response) => {
       const templatevars = {
         user: response[0]
@@ -44,19 +44,17 @@ router.post('/delete', (req, res) => {
     })
 });
 
+// sends a POST request query to update the selected username and password from the database
 router.post('/edit', (req, res) => {
-  passwordUPDATE.updatePassword(req.body)
-  user.getUser(req.session.user_id)
+  passwordHelperFunctions.updatePassword(req.body)
+  // helper function to provide current logged in user email to templatevars
+  loginHelperFunctions.getEmail(req.session.user_id)
   .then((response) => {
     const templatevars = {
       user: response[0]
     }
     res.render("index", templatevars);
   })
-});
-
-router.get('/new', (req, res) => {
-  res.send('<p>hello new </p>');
 });
 
 module.exports = router;
