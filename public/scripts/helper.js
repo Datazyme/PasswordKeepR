@@ -68,6 +68,7 @@ const postNewPassword = (event) => {
     .then(() =>{
     //helper function that will ONLY load the NEW username and password
       loadNewPassword();
+      $("#new-password-form").trigger("reset");
     });
 };
 
