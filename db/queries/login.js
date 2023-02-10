@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-const getUserLogin = (object) => {
+const checkUserLogin = (object) => {
   return db.query(`
   SELECT users.id as user_id, organizations.name as organization, users.name as name, users.email as email, users.master_password as password, users.master_password_hint as hint
   FROM users
@@ -9,11 +9,19 @@ const getUserLogin = (object) => {
   ORDER BY organization;
   `, [object.email, object.password])
     .then(data => {
-      // console.log(data.rows === [] ? 'truthy' : 'user not found!')
       return data.rows
     })
 };
 
-// getUserLogin({email: 'lleband1@earthink.net', password: 'kteiB6r'})
+const getEmail = (id) => {
+  return db.query(`
+  SELECT users.id as id, users.email as email
+  FROM users
+  WHERE id = $1
+  `, [id])
+    .then(data => {
+      return data.rows
+    })
+};
 
-module.exports = { getUserLogin };
+module.exports = { checkUserLogin, getEmail };
