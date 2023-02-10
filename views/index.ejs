@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
 <!-- jerome's code -->
@@ -175,14 +174,13 @@
 
 </div>
 
-<!-- jerome's code -->
 <br>
 <br>
 
+<!-- forms for the password table -->
 <form id="password-edit-submit" action="/api/passwords/edit" method="post"></form>
 <form id="password-edit"></form>
 <form id="password-delete" action="/api/passwords/delete" method="post"></form>
-
 <form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
   <select id="category-pulldown" class="new-category" required>
@@ -204,9 +202,11 @@
 </form>
 <br>
 
+<!-- passwords table -->
 <table>
   <thead>
     <tr>
+      <!-- table headers. first table is for password_id data which is hidden by default. data is only needed to identify each entries for POST request -->
       <th style="display:none;">#</th>
       <th>Credential Type</th>
       <th>Website</th>
@@ -218,10 +218,12 @@
       <th>Delete</th>
     </tr>
   </thead>
-  <!-- placeholder for passwords data -->
+  <!-- placeholder for passwords data. password HTML are inserted via jQuery -->
   <tbody class="passwords-container">
   </tbody>
 </table>
+
+<!-- load all front end scripts here -->
 <script defer src="/scripts/helper.js"></script>
 <script defer src="/scripts/app.js"></script>
 </body>
