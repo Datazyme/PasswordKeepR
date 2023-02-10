@@ -1,15 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-const login = require('../db/queries/login');
-// const { users } = require('../utilities/db');
-// const UserHelper = require('../utilities/userHelper')(users);
-// const router = express.Router();
+const loginHelperFunctions = require('../db/queries/login');
 
-// router.get('/', (req, res) => {
-//   res.render('login');
-// });
-
-// login routes
+// sends GET request to render login page and redirects to index.js if user is already logged in
 router.get('/', (req, res) => {
   if (req.session.user_id) {
     return res.redirect("/");
@@ -20,6 +13,7 @@ router.get('/', (req, res) => {
   res.render('login', templatevars);
 });
 
+// sends POST request from login page and check if email and password match with database
 router.post('/', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -28,37 +22,14 @@ router.post('/', (req, res) => {
     return res.status(400).send("Please provide a valid email and password");
   }
 
-  login.getUserLogin({email, password})
+  loginHelperFunctions.checkUserLogin({email, password})
     .then((response) => {
       if (response.length === 0) {
         return res.status(400).send("Incorrect email/password or no user found with that account!");
       }
       req.session.user_id = response[0].user_id;
       res.redirect("/");
-    })
+    });
 });
-
-/*
-});
-
-router.post('/', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user = UserHelper.getUserByEmail(email, users);
-
-  console.log(req.body)
-  if (!email || !password) {
-    return res.status(400).send("Please provide a valid email and password");
-  }
-  if (!user) {
-    return res.status(400).send("No user found with that email");
-  }
-  if (user.password !== password) {
-    return res.status(400).send("Incorrect password");
-  }
-  req.session.user_id = user.id;
-  res.redirect("/");
-});
-*/
 
 module.exports = router;
