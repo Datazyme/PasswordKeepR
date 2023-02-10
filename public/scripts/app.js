@@ -204,18 +204,20 @@ function getRandomUpper() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97).toUpperCase();
 }
 
-// jerome's code
+//all function definitions are in public/script/helper.js. this makes the document.ready as clean as possible to only contain jquery codes.
 $(document).ready(function () {
-  //calls function to GET passwords using AJAX
+  //calls function to GET all passwords asynchronously
   loadAllPasswords();
 
-  //send POST request when a new password is added and prepend new entry to the list
+  //handles the POST request when a new website username and password is submitted and callback the postNewPassword function
   $("#new-password-form").on("submit", postNewPassword);
 
-  //send POST request to delete current item from the list
+  //handles the POST request to delete the selected username and password from the database
   $("#password-delete").on("submit", deleteCurrentItem);
 
+  //handles the POST request to edit the selected username and password
   $("#password-edit").on("submit", editCurrentItem);
 
+  //handles the POST request to submit changes with the edit
   $("#password-edit-submit").on("submit", submitEditChanges);
 });

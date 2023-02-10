@@ -1,4 +1,4 @@
-//helper function that returns the data in html format
+//returns data in HTML format
 const getPasswords = (object) => {
   const password = `
   <tr>
@@ -20,7 +20,7 @@ const getPasswords = (object) => {
 const loadAllPasswords = function() {
   $.ajax('/api/passwords', { method: 'GET' })
     .then((response) => {
-      //loops through JSON object from api/passwords route and append every entry to the password table
+      //loops through JSON object from api/passwords route and prepend every entry to the password table
       for (const password of response.passwords) {
         $('.passwords-container').prepend(getPasswords(password));
       }
@@ -43,7 +43,7 @@ const loadNewPassword = function(event) {
     });
 };
 
-//callback function when new username and password is added
+//callback function when new username and password is added. the supplied data is then passed to a POST request query
 const postNewPassword = (event) => {
   event.preventDefault();
   const organization_id = 1;
@@ -54,7 +54,6 @@ const postNewPassword = (event) => {
   const username = $(".new-username").val();
   const password = $(".new-password").val();
   const hint = $(".new-hint").val();
-  // console.log('submit')
   $.post('/api/passwords',
   {
     organization_id,
@@ -67,10 +66,12 @@ const postNewPassword = (event) => {
     category,
   })
   .then(() =>{
+    //helper function that will ONLY load the NEW username and password
     loadNewPassword();
   })
 }
 
+//callback function when user deletes a username and password. it passes the username and password information to a POST request query
 const deleteCurrentItem = (event) => {
   if (confirm('Are you sure you want to delete?')) {
     event.preventDefault()
@@ -80,14 +81,16 @@ const deleteCurrentItem = (event) => {
       password_id
     })
     .then(() => {
+      //animate table row to change colour to confirm entry has been successfully deleted
       $(event.originalEvent.submitter).parent().parent().hide('slow').css('background-color', 'maroon')
     })
   }
 }
 
+//callback function when user edits a username and password. it changes table cells to content-editable using replaceWith()
 const editCurrentItem = (event) => {
   event.preventDefault();
-
+  //this helper function just helps DRY up the code and eliminates repition of the DOM
   let siblingsSelector = (selector) => {
       return $(event.originalEvent.submitter).parent().siblings(`${selector}`);
     };
@@ -105,13 +108,13 @@ const editCurrentItem = (event) => {
   `)
 }
 
+//callback function when user is done editing username and password. the changes are then passed to a POST request query
 const submitEditChanges = (event) => {
   event.preventDefault()
-
+  //this helper function just helps DRY up the code and eliminates repition of the DOM
     let siblingsSelector = (selector) => {
       return $(event.originalEvent.submitter).parent().siblings(`${selector}`);
     };
-
     const data = {
       id: siblingsSelector('.password_id').text(),
       website: siblingsSelector('.password_website').text(),
@@ -121,6 +124,7 @@ const submitEditChanges = (event) => {
       category: siblingsSelector('.password_category').children().val(),
     };
 
+    //line 128, 130 and 139 validates the content-editable table cells when the DONE button is clicked. this prevents submitting null data to the POST request query
     let falsyChecker = true;
 
     for (const d in data) {
@@ -132,11 +136,12 @@ const submitEditChanges = (event) => {
       }
     }
 
+    //this code changes the table cells back to default non-editable mode after successful POST request
     if (falsyChecker) {
       $.post('/api/passwords/edit', data)
         .then(() => {
+          //change table row colour back to default table colour
           $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec')
-          // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
           siblingsSelector('.password_website').attr('contentEditable', 'false')
           siblingsSelector('.password_username').attr('contentEditable', 'false')
           siblingsSelector('.password_password').attr('contentEditable', 'false').css('-webkit-text-security', 'square')
