@@ -145,7 +145,7 @@ const submitEditChanges = (event) => {
         $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec');
         siblingsSelector('.password_website').attr('contentEditable', 'false');
         siblingsSelector('.password_username').attr('contentEditable', 'false');
-        siblingsSelector('.password_password').attr('contentEditable', 'false').css('-webkit-text-security', 'square');
+        siblingsSelector('.password_password').attr('contentEditable', 'false').css('-webkit-text-security', '');
         siblingsSelector('.password_hint').attr('contentEditable', 'false');
         siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`);
         siblingsSelector('.password_category').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>`);
