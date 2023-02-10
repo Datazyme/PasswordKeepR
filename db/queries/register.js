@@ -1,5 +1,16 @@
 const db = require('../connection');
 
+const checkIfEmailExist = (email) => {
+  return db.query(`
+  SELECT users.email as email
+  FROM users
+  WHERE email = $1;
+  `, [email])
+    .then(data => {
+      return data.rows
+    })
+};
+
 const registerUser = (object) => {
   return db.query(`
   INSERT INTO users (organization_id, role_id, name, email, master_password, master_password_hint, is_active)
@@ -7,7 +18,6 @@ const registerUser = (object) => {
   RETURNING *;`,
   [object.organization_id, object.email, object.password])
     .then(data => {
-      // console.log(data.rows)
       return data.rows
     });
 };
@@ -24,11 +34,8 @@ const enrollDefaultLogins = (object) => {
   RETURNING *;`,
   [object.user_id, object.organization_id])
     .then(data => {
-      // console.log(data.rows)
       return data.rows
     });
 }
 
-// registerUser({organizations_id: 1, email: 'email.com', password: '4321'})
-
-module.exports = { registerUser, enrollDefaultLogins };
+module.exports = { checkIfEmailExist, registerUser, enrollDefaultLogins };

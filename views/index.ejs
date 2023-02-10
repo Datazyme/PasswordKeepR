@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
 <!-- jerome's code -->
@@ -45,7 +44,7 @@
       <% if(user){ %>
         <p> Logged In As : <%= user.email %> </p>
         <form action="/logout"   method="POST" >
-         <button  type="submit"> Logout </button>
+         <button id="logout-button" type="submit"> Logout </button>
         </form>
           <% } else{ %>
       <Span id="buttons">
@@ -53,7 +52,7 @@
           <button id="login-button">Login</button>
         </a>
         <a href="/register">
-          <button id="register-button">register</button>
+          <button id="register-button">Register</button>
         </a>
         <% } %>
       </Span>
@@ -96,14 +95,14 @@
 
 
   </div>
-<!-- jerome's code -->
+
 <br>
 <br>
 
+<!-- forms for the password table -->
 <form id="password-edit-submit" action="/api/passwords/edit" method="post"></form>
 <form id="password-edit"></form>
 <form id="password-delete" action="/api/passwords/delete" method="post"></form>
-
 <form id="new-password-form" action="/api/passwords" method="post">
   <label>Category</label>
   <select id="category-pulldown" class="new-category" required>
@@ -124,37 +123,30 @@
   <input type="submit" value="Submit">
 </form>
 <br>
-  <table>
-    <thead>
-      <tr>
-        <th style="display:none;">#</th>
-        <th>Credential Type</th>
-        <th>Website</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Hint (optional)</th>
-        <th>Category</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <!-- placeholder for passwords data -->
-    <tbody id="New_Account" class="passwords-container">
-    </tbody>
-  </table>
-</body>
+
+<!-- passwords table -->
+<table>
+  <thead>
+    <tr>
+      <!-- table headers. first table is for password_id data which is hidden by default. data is only needed to identify each entries for POST request -->
+      <th style="display:none;">#</th>
+      <th>Credential Type</th>
+      <th>Website</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Hint (optional)</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <!-- placeholder for passwords data. password HTML are inserted via jQuery -->
+  <tbody id="New_Account" class="passwords-container">
+  </tbody>
+</table>
+
+<!-- load all front end scripts here -->
 <script defer src="/scripts/helper.js"></script>
 <script defer src="/scripts/app.js"></script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
