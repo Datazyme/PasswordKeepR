@@ -36,25 +36,11 @@ header {
   }
 }
 
-
-// @keyframes logo {
-//   from {color: rgb(9, 0, 0);}
-//   to {color: yellow;}
-// }
-
-// .title {
-//   height: 20px;
-//   width: 150px;
-//   padding-left: 0.2in;
-//   padding-bottom: 0.75in;
-//   animation-name: logo;
-//   animation-duration: 4s;
-// }
-
 #headers {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  padding-right: 0.5in;
 }
 
 .main{

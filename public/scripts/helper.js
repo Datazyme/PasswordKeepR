@@ -135,7 +135,7 @@ const submitEditChanges = (event) => {
     if (falsyChecker) {
       $.post('/api/passwords/edit', data)
         .then(() => {
-          $(event.originalEvent.submitter).parent().parent().hide().show('slow').css('background-color', '#ececec')
+          $(event.originalEvent.submitter).parent().parent().hide().show('fast').css('background-color', '#ececec')
           // $(event.originalEvent.submitter).parent().parent().css('background-color', '#ececec')
           siblingsSelector('.password_website').attr('contentEditable', 'false')
           siblingsSelector('.password_username').attr('contentEditable', 'false')
@@ -143,7 +143,9 @@ const submitEditChanges = (event) => {
           siblingsSelector('.password_hint').attr('contentEditable', 'false')
           siblingsSelector('.password_category').replaceWith(`<td class="password_category">${data.category}</td>`)
           siblingsSelector('.password_category').next().replaceWith(`<td><input type="submit" value="Edit" form="password-edit" class="edit-button"></td>`)
+
         })
-  }
+
+      }
 
 }
