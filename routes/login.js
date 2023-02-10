@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
       }
       req.session.user_id = response[0].user_id;
       res.redirect("/");
-    })
+    });
 });
 
 module.exports = router;

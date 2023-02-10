@@ -19,7 +19,7 @@ app.use(cookieSession({
   keys: ["key1", "key2"],
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
   rolling: true
-}))
+}));
 
 app.set('view engine', 'ejs');
 
@@ -61,20 +61,20 @@ app.get('/', (req, res) => {
     .then((response) => {
       const templatevars = {
         user: response[0]
-      }
+      };
       res.render("index", templatevars);
-    })
-  });
+    });
+});
 
-  // sends a POST request to logout and reset cookies
-  app.post("/logout", (req, res) => {
-    req.session = null;
-    res.redirect("/");
-  });
+// sends a POST request to logout and reset cookies
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});
 
-  app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
 
 
 

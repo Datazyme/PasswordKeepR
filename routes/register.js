@@ -25,18 +25,18 @@ router.post("/", (req, res) => {
   //checks if email already exist in the database otherwise proceed to register user
   registerHelperFunctions.checkIfEmailExist(email)
     .then((response) => {
-    const emailCheckResults = response.length === 0 ? null : response[0].email;
+      const emailCheckResults = response.length === 0 ? null : response[0].email;
       if (emailCheckResults === email) {
         return res.status(400).send("Email is already registered!");
       }
       registerHelperFunctions.registerUser({organization_id, email, password})
         .then((response) => {
-          console.log(response)
-          registerHelperFunctions.enrollDefaultLogins({user_id: response[0].id, organization_id})
+          console.log(response);
+          registerHelperFunctions.enrollDefaultLogins({user_id: response[0].id, organization_id});
           req.session.user_id = response[0].id;
-          res.redirect("/")
-      })
-  })
+          res.redirect("/");
+        });
+    });
 });
 
 module.exports = router;
