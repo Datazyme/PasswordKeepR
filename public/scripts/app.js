@@ -1,11 +1,7 @@
 // Client facing scripts here
 // refactor it to jquery
 document.getElementById("New_Account").addEventListener("click", function () {
-  let formElements = [
-    { title: "Website", placeholder: "Website" },
-    { title: "Username", placeholder: "Username" },
-    { title: "Password", placeholder: "Password" },
-  ];
+
 
   let midSection = document.createElement("div");
   midSection.setAttribute("class", "mid_section");
@@ -48,14 +44,6 @@ document.getElementById("New_Account").addEventListener("click", function () {
     midSection.appendChild(div);
   });
 
-  let buttons = `
-    <span class="div4">
-      <button class="add">Add</button>
-      <button class="edit">Edit</button>
-    </span>
-  `;
-  midSection.insertAdjacentHTML("beforeend", buttons);
-
   document.body.appendChild(midSection);
 });
 
@@ -85,7 +73,7 @@ function submitForm(event, div) {
   output.style.display = "block";
 }
 
-document.querySelector(".add").addEventListener("click", function () {
+document.querySelector(".passwords-container").addEventListener("click", function () {
   console.log("test");
 });
 

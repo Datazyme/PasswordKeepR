@@ -13,12 +13,43 @@ header {
   height: 100px;
   display: flex;
   align-items: center;
-  justify-content: center;
+
+}
+.title {
+  width: 600px;
+  padding-left: 0.5in;
+}
+.title span {
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  animation: flip 5s infinite;
+  animation-delay: calc(.2s * var(--i));
+  animation-duration: 6s
+}
+@keyframes flip {
+  from {color: black;}
+  to {color:#4633c2;}
+  0%,80% {
+    transform: rotateY(360deg)
+  }
 }
 
-#title {
-  text-align: center;
-}
+
+// @keyframes logo {
+//   from {color: rgb(9, 0, 0);}
+//   to {color: yellow;}
+// }
+
+// .title {
+//   height: 20px;
+//   width: 150px;
+//   padding-left: 0.2in;
+//   padding-bottom: 0.75in;
+//   animation-name: logo;
+//   animation-duration: 4s;
+// }
 
 #headers {
   display: flex;
@@ -26,34 +57,15 @@ header {
   width: 100%;
 }
 
-
-.mid_section{
-  height: 80px;
-  width: 1600px;
-  background-color: rgb(162, 16, 16);
-  float: left;
-  padding-top: 10px;
-  margin-left: 0;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
-  margin-top: 25px;
-  position: relative;
-  margin-top: 20px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
-
 .main{
-  background-color: #830000;
-  height: 250px;
+  background-color: #7a6ec7;
+  height: 300px;
   width: 500px;
   justify-content: center;
-  margin-left: 0;
+  margin-top: 0.5in;
+  padding-left: 0.75in;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
-
-
 
 output{
   font-family: 'Roboto', sans-serif;
@@ -74,9 +86,6 @@ output{
 ul {
 list-style-type: none;
  }
-
-
-
 
 // buttons
 
@@ -106,7 +115,7 @@ list-style-type: none;
 
 button {
   background-color: white;
-  color: rgb(162, 16, 16);
+  color: black;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -116,8 +125,15 @@ button {
   cursor: pointer;
 }
 
+#new-password-form {
+  background-color: #7a6ec7;
+  padding-top: 0.2in;
+  padding-left: 0.2in;
+  padding-right: 0.2in;
+  padding-bottom: 0.2in;
+}
 
-.add, .edit{
+.edit{
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -144,45 +160,13 @@ button {
   margin: 2px;
 
 }
-#New_Account{
-  appearance: none;
-  background-color: #FAFBFC;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-  box-sizing: border-box;
-  color: #24292E;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  padding: 6px 16px;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
-  margin-bottom: 25px;
-  position:absolute;
-  margin-left: 0px;
-}
 
 #copy-button{
   margin-bottom: 5px;
 }
 
-#title{
-  height: 20px;
-  width: 150px;
-  color:rgb(0, 0, 0);
-}
 
-.div1, .div2, .div3, .div4{
+.div1, .div2, .div3 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -216,7 +200,6 @@ button {
   position:absolute;
   margin-left: 2px;
 }
-
 
 
 
