@@ -68,10 +68,25 @@
 <body>
 
   <header>
-    <h1 id="title">PasswordKeeperR</h1>
+    <div class="title">
+      <span style="--i:1">P</span>
+      <span style="--i:2">a</span>
+      <span style="--i:3">s</span>
+      <span style="--i:4">s</span>
+      <span style="--i:5">w</span>
+      <span style="--i:6">o</span>
+      <span style="--i:7">r</span>
+      <span style="--i:8">d</span>
+      <span style="--i:9">K</span>
+      <span style="--i:010">e</span>
+      <span style="--i:11">e</span>
+      <span style="--i:12">p</span>
+      <span style="--i:13">R</span>
+    </div>
+
     <div id="headers">
       <% if(user){ %>
-        <p> Logged In as : <%= user.email %> </p>
+        <p> Logged In As : <%= user.email %> </p>
         <form action="/logout"   method="POST" >
          <button  type="submit"> Logout </button>
         </form>
@@ -119,6 +134,7 @@
         <input type="checkbox" id="lower-case" />
       </div>
     </div>
+    <br>
     <button class="generate-btn" id="generate">Generate</button>
 
 

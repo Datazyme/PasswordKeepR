@@ -4,7 +4,7 @@ module.exports = {
     org: 'Kwimbee',
     id: "1",
     email: "a@a.com",
-    password: "1234",
+    password: "a@a.com",
   },
   user2RandomID: {
     org: 'Photofeed',
