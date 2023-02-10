@@ -24,6 +24,8 @@ header {
 #title {
   height: 20px;
   width: 150px;
+  padding-left: 0.2in;
+  padding-bottom: 0.75in;
   animation-name: logo;
   animation-duration: 4s;
 }
@@ -32,24 +34,6 @@ header {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-}
-
-
-.mid_section{
-  height: 80px;
-  width: 1600px;
-  background-color: rgb(162, 16, 16);
-  float: left;
-  padding-top: 10px;
-  margin-left: 0;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
-  margin-top: 25px;
-  position: relative;
-  margin-top: 20px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .main{
@@ -188,7 +172,6 @@ button {
   position:absolute;
   margin-left: 2px;
 }
-
 
 
 
