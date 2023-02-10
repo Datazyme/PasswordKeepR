@@ -21,7 +21,7 @@ header {
   to {color: yellow;}
 }
 
-#title {
+.title {
   height: 20px;
   width: 150px;
   padding-left: 0.2in;
@@ -37,7 +37,7 @@ header {
 }
 
 .main{
-  background-color: #6d5fc8;
+  background-color: #7a6ec7;
   height: 300px;
   width: 500px;
   justify-content: center;
@@ -104,6 +104,13 @@ button {
   cursor: pointer;
 }
 
+#new-password-form {
+  background-color: #7a6ec7;
+  padding-top: 0.2in;
+  padding-left: 0.2in;
+  padding-right: 0.2in;
+  padding-bottom: 0.2in;
+}
 
 .edit{
   appearance: none;
