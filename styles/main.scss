@@ -30,31 +30,17 @@ header {
 }
 @keyframes flip {
   from {color: black;}
-  to {color:#4633c2;}
+  to {color:#351fbf;}
   0%,80% {
     transform: rotateY(360deg)
   }
 }
 
-
-// @keyframes logo {
-//   from {color: rgb(9, 0, 0);}
-//   to {color: yellow;}
-// }
-
-// .title {
-//   height: 20px;
-//   width: 150px;
-//   padding-left: 0.2in;
-//   padding-bottom: 0.75in;
-//   animation-name: logo;
-//   animation-duration: 4s;
-// }
-
 #headers {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  padding-right: 0.5in;
 }
 
 .main{
@@ -67,41 +53,24 @@ header {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-output{
-  font-family: 'Roboto', sans-serif;
-  color: #333;
-  font-size: 1.2rem;
-	margin: 0 auto;
-  padding: 1.5rem 2rem;
-  border-radius: 0.2rem;
-  background-color: rgb(255, 255, 255);
-  border: none;
-  width: 90%;
-  display: block;
-  border-bottom: 0.3rem solid transparent;
-  transition: all 0.3s;
-}
-
-
 ul {
 list-style-type: none;
  }
 
 // buttons
 
-#login-button,#register-button{
-  background-color: #c2fbd7;
+#login-button, #register-button, #logout-button{
+  background-color: #9c96c3;
   border-radius: 100px;
-  box-shadow: rgba(53, 6, 128, 0.2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-  color: rgb(214, 99, 99);
+  box-shadow: rgba(53, 6, 128, 0.2) 0 -25px 18px -14px inset,rgba(7, 12, 9, 0.15) 0 1px 2px,rgba(2, 6, 3, 0.15) 0 2px 4px,rgba(1, 2, 2, 0.15) 0 4px 8px,rgba(4, 7, 5, 0.15) 0 8px 16px,rgba(4, 6, 4, 0.15) 0 16px 32px;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 7px 20px;
+  border-color: black;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
-  border: 0;
   font-size: 16px;
   user-select: none;
   -webkit-user-select: none;
@@ -133,38 +102,9 @@ button {
   padding-bottom: 0.2in;
 }
 
-.edit{
-  appearance: none;
-  background-color: #FAFBFC;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-  box-sizing: border-box;
-  color: #24292E;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  padding: 1px 5px;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
-  align-self: flex-end;
-  margin: 2px;
-
-}
-
 #copy-button{
   margin-bottom: 5px;
 }
-
 
 .div1, .div2, .div3 {
     display: flex;
@@ -173,33 +113,6 @@ button {
 
 }
 
-.divsubmit{
-  appearance: none;
-  background-color: #FAFBFC;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-  box-sizing: border-box;
-  color: #24292E;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  list-style: none;
-  padding: 1px 5px;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
-  margin-bottom: 25px;
-  position:absolute;
-  margin-left: 2px;
-}
 
 
 

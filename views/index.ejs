@@ -17,49 +17,6 @@
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
 <!-- jerome's code -->
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  td, th {
-    border: 1px solid #f2f2f2;
-    text-align: left;
-    padding: 8px;
-    vertical-align: middle !important;
-  }
-
-  th {
-    color: white;
-    border: 1px solid #333;
-    background-color: #333;
-  }
-
-  tr:hover {
-    background-color: rgb(213, 230, 236);
-    /* background-color: rgb(198, 229, 239); */
-  }
-
-  tr td.password_password:hover {
-    -webkit-text-security: none;
-  }
-
-  tr {
-    background-color: #ececec;
-  }
-
-  /* tr:nth-child(even) {
-    background-color: #dddddd;
-  } */
-
-  .password_password {
-    -webkit-text-security: square; /* Default */
-  }
-
-  </style>
-<!--  -->
 
 </head>
 
@@ -87,7 +44,7 @@
       <% if(user){ %>
         <p> Logged In As : <%= user.email %> </p>
         <form action="/logout"   method="POST" >
-         <button  type="submit"> Logout </button>
+         <button id="logout-button" type="submit"> Logout </button>
         </form>
           <% } else{ %>
       <Span id="buttons">
@@ -95,7 +52,7 @@
           <button id="login-button">Login</button>
         </a>
         <a href="/register">
-          <button id="register-button">register</button>
+          <button id="register-button">Register</button>
         </a>
         <% } %>
       </Span>
