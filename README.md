@@ -1,3 +1,14 @@
+# PasswordKeepR
+
+An handy and fun app that stores urls and passwords all in one place. A great tool for any employer, where employees can access company websites and add their own. Easily access all websites and passwords you need to do your job and to have some fun. Employees can add their own websites and passwords too! 
+
+Designed by Jerome Almir Lagbas, Anastasia Kuzmin and Archit Purohit
+
+## Check it out!! Video and Screenshots
+
+
+
+
 LHL Node Skeleton
 =========
 
