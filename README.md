@@ -6,11 +6,11 @@ Designed by Jerome Almir Lagbas, Anastasia Kuzmin and Archit Purohit
 
 ## Check it out!! Video and Screenshots
 
-
-
 https://user-images.githubusercontent.com/108641377/218283128-57383f4c-a485-48bf-9ff5-21d4a05da0e3.mov
 
+## Our Database ERD
 
+!["DATABASE"](https://github.com/Datazyme/PasswordKeepR/blob/fixing_css_html/Pictures/PasswordKeepr_ERD.drawio-6.png)
 
 
 LHL Node Skeleton
