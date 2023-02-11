@@ -1,16 +1,23 @@
-# PasswordKeepR
+# **PasswordKeepR**
 
 An handy and fun app that stores urls and passwords all in one place. A great tool for any employer, where employees can access company websites and add their own. Easily access all websites and passwords you need to do your job and to have some fun. Employees can add their own websites and passwords too! 
 
-Designed by Jerome Almir Lagbas, Anastasia Kuzmin and Archit Purohit
+*Designed by Jerome Almir Lagbas, Anastasia Kuzmin and Archit Purohit*
 
 ## Check it out!! Video and Screenshots
 
+https://user-images.githubusercontent.com/108641377/218283128-57383f4c-a485-48bf-9ff5-21d4a05da0e3.mov
 
 
+##  Screenshot
 
-LHL Node Skeleton
-=========
+!["Screenshot of main page"](https://github.com/Datazyme/PasswordKeepR/blob/fixing_css_html/Pictures/Screen%20Shot%202023-02-11%20at%202.29.41%20PM.png)
+
+## Our Database ERD
+
+!["DATABASE"](https://github.com/Datazyme/PasswordKeepR/blob/fixing_css_html/Pictures/PasswordKeepr_ERD.drawio-6.png)
+
+
 
 ## Project Setup
 
@@ -52,7 +59,14 @@ The following steps are only for _one_ of the group members to perform.
 
 - Node 10.x or above
 - NPM 5.x or above
-- PG 6.x
+- chalk 2.4.2
+- cookie-session 2.0.0
+- dotenv 2.0.0
+- ejs 2.6.2
+- express 4.17.1
+- morgan 1.9.1
+- pg 8.5.0
+- sass 1.35.1
+- nodemon 2.0.10 
 
 
-testing code for push
